@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.counterplus.ekapop.restaurant1.InitialActivity">
+
+    <TextView
+        android:id="@+id/lbIaPosID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtIaPosID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/lbIaPosID"
+        app:layout_constraintStart_toEndOf="@+id/lbIaPosID" />
+
+    <TextView
+        android:id="@+id/lbIaTaxID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbIaPosID" />
+
+    <EditText
+        android:id="@+id/txtIaTaxID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/lbIaTaxID"
+        app:layout_constraintStart_toEndOf="@+id/lbIaTaxID" />
+
+    <TextView
+        android:id="@+id/lbIaPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbIaTaxID" />
+
+    <EditText
+        android:id="@+id/txtIaPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/lbIaPrint"
+        app:layout_constraintStart_toEndOf="@+id/lbIaPrint" />
+
+    <TextView
+        android:id="@+id/lbIaHost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbIaPrint" />
+
+    <EditText
+        android:id="@+id/txtIaHost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="txtIaHost"
+        app:layout_constraintBottom_toBottomOf="@+id/lbIaHost"
+        app:layout_constraintStart_toEndOf="@+id/lbIaHost" />
+
+    <TextView
+        android:id="@+id/lbIaPortID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbIaHost" />
+
+    <EditText
+        android:id="@+id/txtIaPortID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="txtIaPortID"
+        app:layout_constraintStart_toEndOf="@+id/lbIaPortID"
+        app:layout_constraintTop_toBottomOf="@+id/txtIaHost" />
+
+    <TextView
+        android:id="@+id/lbIaWebDirectory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbIaPortID" />
+
+    <EditText
+        android:id="@+id/txtIaWebDirectory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="txtIaWebDirectory"
+        app:layout_constraintStart_toEndOf="@+id/lbIaWebDirectory"
+        app:layout_constraintTop_toBottomOf="@+id/txtIaPortID" />
+
+    <TextView
+        android:id="@+id/lbIaUserDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/txtIaUserDB"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txtIaUserDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="txtIaUserDB"
+        app:layout_constraintStart_toEndOf="@+id/lbIaUserDB"
+        app:layout_constraintTop_toBottomOf="@+id/txtIaWebDirectory" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="368dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtIaPasswordDB">
+
+        <Button
+            android:id="@+id/btnIaInit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="กำหนดค่าต่างๆ" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="368dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnIaSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/btnIaPrint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="เครื่องพิมพ์" />
+
+        <Button
+            android:id="@+id/btnFristRes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="สร้างฐานข้อมูล" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lbIaPasswordDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/txtIaPasswordDB"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txtIaPasswordDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="txtIaPasswordDB"
+        app:layout_constraintStart_toEndOf="@+id/lbIaPasswordDB"
+        app:layout_constraintTop_toBottomOf="@+id/txtIaUserDB" />
+
+</android.support.constraint.ConstraintLayout>
