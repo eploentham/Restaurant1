@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.epson.epos2.printer.Printer;
@@ -97,7 +94,7 @@ public class InitialActivity extends AppCompatActivity {
         btnIaPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivityForResult(new Intent(view.getContext(), InitialPrintActivity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
         btnFristRes.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +106,7 @@ public class InitialActivity extends AppCompatActivity {
         btnIaInit1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(view.getContext(), FirstResActivity.class).putExtra("RestaurantControl",rs), 0);
+                startActivityForResult(new Intent(view.getContext(), Initial1Activity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
     }

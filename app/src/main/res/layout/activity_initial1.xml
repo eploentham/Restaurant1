@@ -93,8 +93,10 @@
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="182dp">
 
         <Button

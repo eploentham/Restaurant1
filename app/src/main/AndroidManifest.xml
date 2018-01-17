@@ -31,7 +31,8 @@
         <activity android:name=".CloseDayAddActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".Initial1Activity" />
-        <activity android:name=".FirstResActivity"></activity>
+        <activity android:name=".FirstResActivity" />
+        <activity android:name=".InitialPrintActivity" />
     </application>
 
 </manifest>
