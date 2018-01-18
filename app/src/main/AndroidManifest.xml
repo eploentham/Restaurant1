@@ -34,7 +34,11 @@
         <activity android:name=".FirstResActivity" />
         <activity android:name=".InitialPrintActivity" />
         <activity android:name=".ResViewActivity" />
-        <activity android:name=".ResAddActivity"></activity>
+        <activity android:name=".ResAddActivity" />
+        <activity android:name=".AreaViewActivity" />
+        <activity android:name=".AreaAddActivity" />
+        <activity android:name=".TableViewActivity" />
+        <activity android:name=".TableAddActivity"></activity>
     </application>
 
 </manifest>

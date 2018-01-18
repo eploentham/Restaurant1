@@ -46,5 +46,11 @@ public class Initial1Activity extends AppCompatActivity {
                 startActivityForResult(new Intent(view.getContext(), ResViewActivity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
+        btnIa1AreaView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), AreaViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
     }
 }
