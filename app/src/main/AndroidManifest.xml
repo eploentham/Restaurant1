@@ -33,6 +33,8 @@
         <activity android:name=".Initial1Activity" />
         <activity android:name=".FirstResActivity" />
         <activity android:name=".InitialPrintActivity" />
+        <activity android:name=".ResViewActivity" />
+        <activity android:name=".ResAddActivity"></activity>
     </application>
 
 </manifest>
