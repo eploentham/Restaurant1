@@ -21,16 +21,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableViewActivity extends AppCompatActivity {
+public class UserViewActivity extends AppCompatActivity {
+
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrT;
+    JSONArray jarrU;
     private RestaurantControl rs;
-    ListView lvTvView;
-    Button btnTvAdd;
+    ListView lvUvView;
+    Button btnUvAdd;
     Boolean pageLoad=false;
-    public ArrayList<Table> lTa = new ArrayList<Table>();
+    public ArrayList<User> lUa = new ArrayList<User>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
     ProgressDialog pd;
@@ -39,42 +40,42 @@ public class TableViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_view);
+        setContentView(R.layout.activity_user_view);
 
         pageLoad = true;
 
-                lvTvView = findViewById(R.id.lvTvView);
-                btnTvAdd = findViewById(R.id.btnTvAdd);
+        lvUvView = (ListView)findViewById(R.id.lvUvView);
+        lvUvView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
-                lvTvView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
+        rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
+        daS = new DatabaseSQLi(this,"");
+        btnUvAdd = (Button)findViewById(R.id.btnUvAdd);
 
-                Intent intent = getIntent();
-                rs = (RestaurantControl) intent.getSerializableExtra("RestaurantControl");
-                daS = new DatabaseSQLi(this,"");
-
-                btnTvAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.table));
-                btnTvAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        rs.taID ="";
-                        Intent s1 = new Intent(view.getContext(), TableAddActivity.class);
+        btnUvAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.user));
+        btnUvAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rs.usID ="";
+                Intent s1 = new Intent(view.getContext(), UserAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
         });
-        lvTvView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvUvView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try{
-                    JSONObject catObj = (JSONObject) jarrT.get(i);
+                    JSONObject catObj = (JSONObject) jarrU.get(i);
                     //String ID = catObj.getString("foods_id");
-                    rs.taID = catObj.getString("table_id");
+                    User ua = new User();
+                    ua = lUa.get(i);
+                    rs.usID = ua.ID;
                 }catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
-                Intent s1 = new Intent(view.getContext(), TableAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), UserAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
@@ -86,23 +87,24 @@ public class TableViewActivity extends AppCompatActivity {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrT = daS.TableSelectAll();
-                setLvTable();
+                jarrU = daS.UserSelectAll();
+                setLvUser();
             }
         }else if(rs.AccessMode.equals("Internet")){
             if(!pageLoad){
                 super.onResume();
-                new retrieveTable().execute();
+                new retrieveUser().execute();
             }
         }else{
             if(!pageLoad){
                 super.onResume();
-                new retrieveTable().execute();
+                new retrieveUser().execute();
             }
         }
+
         ////    setLvFoods();
     }
-    class retrieveTable extends AsyncTask<String,String,String> {
+    class retrieveUser extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
@@ -110,7 +112,7 @@ public class TableViewActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
-            jarrT = jsonparser.getJSONFromUrl(rs.hostGetTable,params);
+            jarrU = jsonparser.getJSONFromUrl(rs.hostGetUser,params);
             //rs.jarrR = jarrT.toString();
             //} catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -121,12 +123,12 @@ public class TableViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String a = ab;
-            setLvTable();
+            setLvUser();
             pd.dismiss();
         }
         @Override
         protected void onPreExecute() {
-            pd = new ProgressDialog(TableViewActivity.this);
+            pd = new ProgressDialog(UserViewActivity.this);
             pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             pd.setTitle("Loading...");
             pd.setMessage("Loading Bill ...");
@@ -137,31 +139,34 @@ public class TableViewActivity extends AppCompatActivity {
             pd.show();
         }
     }
-    private void setLvTable(){
+    private void setLvUser(){
         try {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //jarrR = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
             //jarrR = jsonparser.getJSONFromUrl(rs.hostGetRes,params);
-            if(jarrT!=null){
+            if(jarrU!=null){
                 //jarrT =  new JSONArray(rs.jarrR);
                 arrayList = new ArrayList<String>();
                 //JSONArray categories = jobj.getJSONArray("area");
                 //JSONArray json = new JSONArray(jobj);
-                lTa.clear();
-                for (int i = 0; i < jarrT.length(); i++) {
-                    JSONObject catObj = (JSONObject) jarrT.get(i);
-                    Table ta = new Table();
-                    ta.ID = catObj.getString(ta.dbID);
-                    ta.Code = catObj.getString(ta.dbCode);
-                    ta.Name = catObj.getString(ta.dbName);
-                    ta.Remark = catObj.getString(ta.dbRemark);
-                    ta.Active = catObj.getString(ta.dbActive);
-                    ta.AreaID = catObj.getString(ta.dbAreaID);
-                    ta.Sort1 = catObj.getString(ta.dbSort1);
-                    lTa.add(ta);
+                lUa.clear();
+                for (int i = 0; i < jarrU.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrU.get(i);
+                    User a = new User();
+                    a.ID = catObj.getString(a.dbID);
+                    a.Login = catObj.getString(a.dbLogin);
+                    a.Name = catObj.getString(a.dbName);
+                    a.Password1 = catObj.getString(a.dbPassword1);
+                    a.Privilege = catObj.getString(a.dbPrivilege);
+                    a.Remark = catObj.getString(a.dbRemark);
+                    a.Sort1 = catObj.getString(a.dbSort1);
+                    a.VoidBill = catObj.getString(a.dbVoidBill);
+                    a.VoidCloseday = catObj.getString(a.dbVoidCloseday);
+                    lUa.add(a);
                     //arrayList.add(f.Code+" "+f.Name+" "+f.Price+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
-                    arrayList.add(ta.Code+" "+ta.Name+""+rs.getAreaToName(ta.AreaID,"genid")+" "+ta.Remark);
+                    arrayList.add(a.Login+" "+a.Name+""+a.Privilege+" "+a.Remark);
                 }
+
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList){
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent){
@@ -179,7 +184,7 @@ public class TableViewActivity extends AppCompatActivity {
                     }
                 };
                 //lvAvView = (ListView)findViewById(R.genid.lvFoods);
-                lvTvView.setAdapter(adapter);
+                lvUvView.setAdapter(adapter);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block

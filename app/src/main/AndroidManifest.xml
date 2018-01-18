@@ -38,7 +38,13 @@
         <activity android:name=".AreaViewActivity" />
         <activity android:name=".AreaAddActivity" />
         <activity android:name=".TableViewActivity" />
-        <activity android:name=".TableAddActivity"></activity>
+        <activity android:name=".TableAddActivity" />
+        <activity android:name=".FoodsTypeViewActivity" />
+        <activity android:name=".FoodsTypeAddActivity" />
+        <activity android:name=".FoodsViewActivity" />
+        <activity android:name=".FoodsAddActivity" />
+        <activity android:name=".UserViewActivity" />
+        <activity android:name=".UserAddActivity"></activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,88 +22,98 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableViewActivity extends AppCompatActivity {
+public class FoodsViewActivity extends AppCompatActivity {
+
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrT;
+    JSONArray jarrF;
     private RestaurantControl rs;
-    ListView lvTvView;
-    Button btnTvAdd;
-    Boolean pageLoad=false;
-    public ArrayList<Table> lTa = new ArrayList<Table>();
+    public ArrayList<Foods> lFoo = new ArrayList<Foods>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
+    Boolean pageLoad=false;
+    ListView lvFoods;
+    Button btnFoodsA;
     ProgressDialog pd;
     DatabaseSQLi daS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_view);
+        setContentView(R.layout.activity_foods_view);
 
         pageLoad = true;
 
-                lvTvView = findViewById(R.id.lvTvView);
-                btnTvAdd = findViewById(R.id.btnTvAdd);
+        btnFoodsA = findViewById(R.id.btnFoodsAdd);
+        lvFoods = findViewById(R.id.lvFoods);
+        lvFoods.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
+        //GridLayout linearLayout = (GridLayout) findViewById(R.genid.ac//;
+        //linearLayout.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
-                lvTvView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
+        Intent intent = getIntent();
+        rs = (RestaurantControl) intent.getSerializableExtra("RestaurantControl");
+        daS = new DatabaseSQLi(this,"");
 
-                Intent intent = getIntent();
-                rs = (RestaurantControl) intent.getSerializableExtra("RestaurantControl");
-                daS = new DatabaseSQLi(this,"");
 
-                btnTvAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.table));
-                btnTvAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        rs.taID ="";
-                        Intent s1 = new Intent(view.getContext(), TableAddActivity.class);
+
+        btnFoodsA.setText(getResources().getString(R.string.add)+getResources().getString(R.string.desc)+getResources().getString(R.string.foods));
+
+        btnFoodsA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rs.fooID="";
+                Intent s1 = new Intent(view.getContext(), FoodsAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
         });
-        lvTvView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvFoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
+                //TextView textView = (TextView) relativeLayout.getChildAt(0);
+                //ImageView imaegView = (ImageView) relativeLayout.getChildAt(1);
+                //textView.setTextColor(Color.RED);
                 try{
-                    JSONObject catObj = (JSONObject) jarrT.get(i);
+                    JSONObject catObj = (JSONObject) jarrF.get(i);
                     //String ID = catObj.getString("foods_id");
-                    rs.taID = catObj.getString("table_id");
+                    rs.fooID = catObj.getString("foods_id");
                 }catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
-                Intent s1 = new Intent(view.getContext(), TableAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), FoodsAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
         });
+        //new retrieveFoods().execute();
+        //setLvFoods();
         pageLoad=false;
     }
-    @Override
     protected void onResume() {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrT = daS.TableSelectAll();
-                setLvTable();
+                jarrF = daS.FoodsSelectAll();
+                setLvFoods();
             }
         }else if(rs.AccessMode.equals("Internet")){
             if(!pageLoad){
                 super.onResume();
-                new retrieveTable().execute();
+                new retrieveFoods().execute();
             }
         }else{
             if(!pageLoad){
                 super.onResume();
-                new retrieveTable().execute();
+                new retrieveFoods().execute();
             }
         }
         ////    setLvFoods();
     }
-    class retrieveTable extends AsyncTask<String,String,String> {
+    class retrieveFoods extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
@@ -110,8 +121,8 @@ public class TableViewActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
-            jarrT = jsonparser.getJSONFromUrl(rs.hostGetTable,params);
-            //rs.jarrR = jarrT.toString();
+            jarrF = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
+//            rs.jarrR = jarrR.toString();
             //} catch (JSONException e) {
             // TODO Auto-generated catch block
             //    e.printStackTrace();
@@ -121,12 +132,12 @@ public class TableViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String a = ab;
-            setLvTable();
+            setLvFoods();
             pd.dismiss();
         }
         @Override
         protected void onPreExecute() {
-            pd = new ProgressDialog(TableViewActivity.this);
+            pd = new ProgressDialog(FoodsViewActivity.this);
             pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             pd.setTitle("Loading...");
             pd.setMessage("Loading Bill ...");
@@ -137,30 +148,35 @@ public class TableViewActivity extends AppCompatActivity {
             pd.show();
         }
     }
-    private void setLvTable(){
+    private void setLvFoods(){
         try {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //jarrR = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
             //jarrR = jsonparser.getJSONFromUrl(rs.hostGetRes,params);
-            if(jarrT!=null){
-                //jarrT =  new JSONArray(rs.jarrR);
+            if(jarrF!=null){
+//                jarrR =  new JSONArray(rs.jarrR);
                 arrayList = new ArrayList<String>();
+                Foods f = new Foods();
                 //JSONArray categories = jobj.getJSONArray("area");
                 //JSONArray json = new JSONArray(jobj);
-                lTa.clear();
-                for (int i = 0; i < jarrT.length(); i++) {
-                    JSONObject catObj = (JSONObject) jarrT.get(i);
-                    Table ta = new Table();
-                    ta.ID = catObj.getString(ta.dbID);
-                    ta.Code = catObj.getString(ta.dbCode);
-                    ta.Name = catObj.getString(ta.dbName);
-                    ta.Remark = catObj.getString(ta.dbRemark);
-                    ta.Active = catObj.getString(ta.dbActive);
-                    ta.AreaID = catObj.getString(ta.dbAreaID);
-                    ta.Sort1 = catObj.getString(ta.dbSort1);
-                    lTa.add(ta);
+                lFoo.clear();
+                for (int i = 0; i < jarrF.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrF.get(i);
+                    f = new Foods();
+                    f.ID = catObj.getString(f.dbID);
+                    f.Code = catObj.getString(f.dbCode);
+                    f.Name = catObj.getString(f.dbName);
+                    f.Remark = catObj.getString(f.dbRemark);
+                    f.ResCode = catObj.getString(f.dbResCode);
+                    f.Price = catObj.getString(f.dbPrice);
+                    f.PrinterName = catObj.getString(f.dbPrinterName);
+                    f.Active = catObj.getString(f.dbActive);
+                    f.ResId = catObj.getString(f.dbResId);
+                    f.StatusFoods = catObj.getString(f.dbStatusFoods);
+                    f.TypeId = catObj.getString(f.dbTypeId);
+                    lFoo.add(f);
                     //arrayList.add(f.Code+" "+f.Name+" "+f.Price+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
-                    arrayList.add(ta.Code+" "+ta.Name+""+rs.getAreaToName(ta.AreaID,"genid")+" "+ta.Remark);
+                    arrayList.add(f.Code+" "+f.Name+" "+getResources().getString(R.string.price)+" "+f.Price+" "+getResources().getString(R.string.remark)+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
                 }
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList){
                     @Override
@@ -178,12 +194,14 @@ public class TableViewActivity extends AppCompatActivity {
                         return view;
                     }
                 };
-                //lvAvView = (ListView)findViewById(R.genid.lvFoods);
-                lvTvView.setAdapter(adapter);
+                lvFoods = (ListView)findViewById(R.id.lvFoods);
+                lvFoods.setAdapter(adapter);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            Log.e("setLvFoods ",e.getMessage());
         }
+
     }
 }
