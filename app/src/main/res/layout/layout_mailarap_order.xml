@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_mailarap_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.counterplus.ekapop.restaurant1.MailarapOrderAdd">
+
+    <Spinner
+        android:id="@+id/cboMailarapArea"
+        android:layout_width="108dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/chkMoMailarapTable"
+        android:layout_width="114dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/cboMailarapTable"
+        app:layout_constraintStart_toEndOf="@+id/cboMailarapArea"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/chkMInRes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/chkMToGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/cboMailarapTable"
+        android:layout_width="111dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtMFoodsCode"
+        android:layout_width="66dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cboMailarapArea" />
+
+    <TextView
+        android:id="@+id/lbMFoodsName1"
+        android:layout_width="178dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/btnMClear"
+        app:layout_constraintStart_toEndOf="@+id/txtMFoodsCode"
+        app:layout_constraintTop_toBottomOf="@+id/chkMoMailarapTable" />
+
+    <Button
+        android:id="@+id/btnMClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cboMailarapTable" />
+
+    <TextView
+        android:id="@+id/lbFoodsRemark"
+        android:layout_width="33dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMFoodsCode" />
+
+    <EditText
+        android:id="@+id/txtMFoodsRemark"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbFoodsRemark"
+        app:layout_constraintTop_toBottomOf="@+id/lbMFoodsName1" />
+
+    <TextView
+        android:id="@+id/lbMQty"
+        android:layout_width="39dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbFoodsRemark" />
+
+    <com.hrules.horizontalnumberpicker.HorizontalNumberPicker
+        android:id="@+id/txtMQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/lbMQty"
+        app:layout_constraintTop_toBottomOf="@+id/txtMFoodsRemark" />
+
+    <Button
+        android:id="@+id/btnMailarapAdd"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="New Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/txtMQty"
+        app:layout_constraintTop_toBottomOf="@+id/txtMFoodsRemark" />
+
+    <ListView
+        android:id="@+id/lvMOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMailarapAdd" />
+
+    <EditText
+        android:id="@+id/txtMPassword"
+        android:layout_width="149dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvMOrder" />
+
+    <Button
+        android:id="@+id/btnMSave"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintStart_toEndOf="@+id/txtMPassword"
+        app:layout_constraintTop_toBottomOf="@+id/lvMOrder" />
+</android.support.constraint.ConstraintLayout>
+

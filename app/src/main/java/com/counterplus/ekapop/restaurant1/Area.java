@@ -1,5 +1,11 @@
 package com.counterplus.ekapop.restaurant1;
 
+import android.app.Activity;
+
+import com.epson.epos2.printer.Printer;
+import com.epson.epos2.printer.PrinterStatusInfo;
+import com.epson.epos2.printer.ReceiveListener;
+
 /**
  * Created by ekapop on 9/1/2016.
  */
@@ -48,4 +54,17 @@ public class Area extends Database{
             +", "+dbVoidUser+" "+tex+"  NULL "
             +"); ";
     public String cDropArea="DROP TABLE IF EXISTS "+tbNameArea+" ;";
+
+    /**
+     * Created by ekapop on 1/19/2018.
+     */
+
+    public static class MailarapOrderAdd extends Activity implements ReceiveListener {
+
+
+        @Override
+        public void onPtrReceive(Printer printer, int i, PrinterStatusInfo printerStatusInfo, String s) {
+
+        }
+    }
 }

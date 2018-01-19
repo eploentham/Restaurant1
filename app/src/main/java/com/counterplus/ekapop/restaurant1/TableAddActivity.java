@@ -179,7 +179,7 @@ public class TableAddActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 //                                finish();
 //                                flagDel=false;
-//                                Toast.makeText(MailarapOrderAdd.this,"You clicked no button",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(com.counterplus.ekapop.restaurant1.Area.MailarapOrderAdd.this,"You clicked no button",Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
                             }
                         });
