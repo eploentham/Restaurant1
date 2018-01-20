@@ -123,6 +123,7 @@
     <string name="btnIa1TableView">เพิ่มโต๊ธ</string>
     <string name="btnIa1AreaView">เพิ่มพื้นที่</string>
     <string name="btnIaInit1">กำหนดค่าต่างๆ</string>
+    <string name="resadd">เพิ่มร้านอาหาร</string>
 
     <string name="january">มกราคม</string>
     <string name="february">กุมภาพันธ์</string>

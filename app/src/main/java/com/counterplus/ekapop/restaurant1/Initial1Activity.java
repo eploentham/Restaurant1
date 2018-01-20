@@ -34,7 +34,7 @@ public class Initial1Activity extends AppCompatActivity {
         btnIa1FoodsView.setText(R.string.foodsadd);
         btnIa1BillVoid.setText(R.string.btnMBillVoid);
         btnIa1TableChange.setText(R.string.btnMTChange);
-        btnIa1ResView.setText(R.string.btnFristRes);
+        btnIa1ResView.setText(R.string.resadd);
         btnIa1TableMerge.setText(R.string.btnMTMerge);
         btnIa1User.setText(R.string.user);
         btnIa1TableView.setText(R.string.btnIa1TableView);
@@ -50,6 +50,42 @@ public class Initial1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(view.getContext(), AreaViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1TableView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), TableViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1FoodsTypeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), FoodsTypeViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1FoodsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), FoodsViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1BillVoid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), BillVoidActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1User.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), UserViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1TableChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), TableChangeActivity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
     }
