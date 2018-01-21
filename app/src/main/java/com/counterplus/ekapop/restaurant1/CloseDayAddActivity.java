@@ -77,11 +77,13 @@ public class CloseDayAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_close_day_add);
 
+        rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
+
         mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);
 
         /*Intent intent = getIntent();*/
-        rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
+
         daS = new DatabaseSQLi(this,"");
         pd = new ProgressDialog(CloseDayAddActivity.this);
         textSize = rs.TextSize.equals("")?16:Integer.parseInt(rs.TextSize);
@@ -122,7 +124,7 @@ public class CloseDayAddActivity extends AppCompatActivity {
         txtCaCashDraw1Remark = (EditText) findViewById(R.id.txtCaCashDraw1Remark);
 //        txtCaCashDraw2Remark = (EditText) findViewById(R.id.txtCaCashDraw2Remark);
 //        txtCaCashDraw3Remark = (EditText) findViewById(R.id.txtCaCashDraw3Remark);
-//        txtCaUserPassword = (EditText) findViewById(R.id.txtCaUserPassword);
+        txtCaUserPassword = (EditText) findViewById(R.id.txtCaUserPassword);
         txtCaPasswordVoid = (EditText) findViewById(R.id.txtCaPasswordVoid);
         btnCaSave = (Button) findViewById(R.id.btnCaSave);
         btnCaVoid = (Button) findViewById(R.id.btnCaVoid);
@@ -144,11 +146,11 @@ public class CloseDayAddActivity extends AppCompatActivity {
         lbCaNetTotal.setText(R.string.nettotal);
         lbCaRemark.setText(R.string.remark);
         lbCaCashReceive1.setText(R.string.CashReceive1);
-        lbCaCashReceive2.setText(R.string.CashReceive2);
-        lbCaCashReceive3.setText(R.string.CashReceive3);
+//        lbCaCashReceive2.setText(R.string.CashReceive2);
+//        lbCaCashReceive3.setText(R.string.CashReceive3);
         lbCaCashDraw1.setText(R.string.CashDraw1);
-        lbCaCashDraw2.setText(R.string.CashDraw2);
-        lbCaCashDraw3.setText(R.string.CashDraw3);
+//        lbCaCashDraw2.setText(R.string.CashDraw2);
+//        lbCaCashDraw3.setText(R.string.CashDraw3);
         lbCaCloseDayDate.setText("ระบุวันที่");
         btnCaSave.setText(R.string.save);
         btnCaVoid.setText(R.string.void1);
@@ -260,7 +262,7 @@ public class CloseDayAddActivity extends AppCompatActivity {
             }
         });
         txtCaUserPassword.setVisibility(View.INVISIBLE);
-        layout17.setVisibility(View.INVISIBLE);
+//        layout17.setVisibility(View.INVISIBLE);
         setControlNewCloseDay();
 
         if(cboCaRes.getChildCount()>0){
@@ -353,11 +355,11 @@ public class CloseDayAddActivity extends AppCompatActivity {
         lbCaNetTotal.setTextSize(textSize+2);
         lbCaRemark.setTextSize(textSize);
         lbCaCashReceive1.setTextSize(textSize);
-        lbCaCashReceive2.setTextSize(textSize);
-        lbCaCashReceive3.setTextSize(textSize);
+//        lbCaCashReceive2.setTextSize(textSize);
+//        lbCaCashReceive3.setTextSize(textSize);
         lbCaCashDraw1.setTextSize(textSize);
-        lbCaCashDraw2.setTextSize(textSize);
-        lbCaCashDraw3.setTextSize(textSize);
+//        lbCaCashDraw2.setTextSize(textSize);
+//        lbCaCashDraw3.setTextSize(textSize);
         lbCaCntBill.setTextSize(textSize);
         lbCaCntOrder.setTextSize(textSize);
 

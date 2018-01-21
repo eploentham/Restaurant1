@@ -122,6 +122,7 @@ public class BillAddActivity extends AppCompatActivity {
         btnBaSave.setText(R.string.billcheck);
         lbBaCashTon.setText(R.string.cashton);
         lbBaCashReceive.setText(R.string.cashreceive);
+        txtBaUserPassword.setText("");
 //        layoutba10.setVisibility(View.GONE);
 
         daS = new DatabaseSQLi(this,"");

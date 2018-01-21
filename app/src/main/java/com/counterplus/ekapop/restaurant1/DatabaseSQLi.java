@@ -921,18 +921,18 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                 c.close();
 //                db.close();
                 sql ="Insert Into "+da.tbNameTable+"("+ta.dbID+","+ta.dbCode+","+ta.dbName+","+ta.dbRemark+","
-                        +ta.dbSort1+","+ta.dbDateCreate+","+ta.dbActive+","+ta.dbStatusUse+","
+                        +ta.dbSort1+","+ta.dbDateCreate+","+ta.dbActive+","
                         +ta.dbStatusToGo+","+ta.dbDateUse+","+ta.dbStatusUse+") "
                         +"Values ("+this.genid +",'"+code1+"','"+name+"','"+remark+"','"
-                        +sort1+"',"+ gendate +",'1','','"
+                        +sort1+"',"+ gendate +",'1','"
                         +statustogo+"','','0')";
             }else{
-                sql="Update "+da.tbNameRes +" "
+                sql="Update "+da.tbNameTable +" "
                         +"Set "+ta.dbCode+"='"+code+"' "
                         +","+ta.dbName+"='"+name+"' "
                         +","+ta.dbRemark+"='"+remark+"' "
                         +","+ta.dbSort1+"='"+sort1+"' "
-//                        +","+ta.dbStatusUse+"='"+statususe+"' "
+                        +","+ta.dbStatusUse+"='0' "
                         +","+ta.dbStatusToGo+"='"+statustogo+"' "
 //                        +","+ta.dbDateUse+"='"+dateuse+"' "
                         +" Where "+ta.dbID+"='"+id+"'";

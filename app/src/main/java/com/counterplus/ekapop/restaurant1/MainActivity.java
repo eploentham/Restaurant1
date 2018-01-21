@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
             rs.refresh();
 //            }
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
 //            fileErr=true;
         }

@@ -257,6 +257,7 @@ public class TableAddActivity extends AppCompatActivity {
         ta.Code=txtTaCode.getText().toString().trim();
         ta.Name=txtTaName.getText().toString().trim();
         ta.Remark=txtTaRemark.getText().toString().trim();
+        ta.StatusUse="0";
         if(chkTaActive.isChecked()){
             ta.Active="1";
         }else{

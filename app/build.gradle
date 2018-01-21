@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -29,20 +30,6 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

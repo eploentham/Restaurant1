@@ -73,6 +73,9 @@ public class FirstResActivity extends AppCompatActivity {
         lbFrUserDB.setText(R.string.user);
         lbFrHosId.setText(R.string.lbFrHostID);
         lbFrPasswordDB.setText(R.string.password);
+        chkFrStandalone.setText(R.string.chkFrStandalone);
+        chkFrLan.setText(R.string.chkFrHaveServer);
+        chkFrInternet.setText(R.string.chkFrInternet);
 
         btnFrBackupDatabase.setText(R.string.btnFrBackUp);
         btnFrSaveText.setText(R.string.btnFrSaveText);
