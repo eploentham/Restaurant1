@@ -250,6 +250,8 @@ public class TableAddActivity extends AppCompatActivity {
         }
     }
     private void getTable(){
+        String areaId = rs.getArea(cboTaArea.getSelectedItem().toString(),"id");
+
         ta = new Table();
         ta.ID = rs.taID;
         ta.Sort1=txtTaSort1.getText().toString().trim();
@@ -263,6 +265,7 @@ public class TableAddActivity extends AppCompatActivity {
         }else{
             ta.Active="3";
         }
+        ta.AreaID = areaId;
     }
     class insertTable extends AsyncTask<String,String,String> {
         @Override

@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -220,6 +223,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService( Context.TELEPHONY_SERVICE );
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
     }
     class retrieveArea extends AsyncTask<String,String,String> {
 
