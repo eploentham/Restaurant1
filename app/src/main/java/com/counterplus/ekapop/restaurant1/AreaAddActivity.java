@@ -210,7 +210,7 @@ public class AreaAddActivity extends AppCompatActivity {
     private void setControl(){
         try {
             ar = new Area();
-            if((jarr!=null) && (!jarr.equals("[]"))){
+            if(jarr.length()>0){
                 JSONObject catObj = (JSONObject) jarr.get(0);
                 ar.ID = catObj.getString(ar.dbID);
                 ar.Code = catObj.getString(ar.dbCode);
@@ -228,6 +228,12 @@ public class AreaAddActivity extends AppCompatActivity {
                 }else{
                     chkAaActive.setChecked(false);
                 }
+            }else{
+                txtAaCode.setText("");
+                txtAaName.setText("");
+                txtAaRemark.setText("");
+                txtAaSort1.setText("");
+                chkAaActive.setChecked(true);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block

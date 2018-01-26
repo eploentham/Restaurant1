@@ -8,7 +8,7 @@
 
     <Spinner
         android:id="@+id/cboBvArea"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -17,7 +17,7 @@
 
     <Spinner
         android:id="@+id/cboBvTable"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -26,9 +26,9 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="171dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,14 +66,14 @@
         android:id="@+id/btnBvSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txtBvBillCode"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintStart_toEndOf="@id/txtBvBillCode"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
     <Button
         android:id="@+id/btnBvVoid"
@@ -87,15 +87,15 @@
 
     <ListView
         android:id="@+id/lvBvBill"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="335dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtBvPassword"
+        app:layout_constraintBottom_toTopOf="@id/txtBvPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBvBillCode" />
 
@@ -110,7 +110,7 @@
         android:inputType="textPersonName"
         android:text="txtBvPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnBvVoid"
+        app:layout_constraintEnd_toStartOf="@id/btnBvVoid"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

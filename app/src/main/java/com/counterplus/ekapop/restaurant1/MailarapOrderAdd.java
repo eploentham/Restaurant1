@@ -92,6 +92,9 @@ public class MailarapOrderAdd extends Activity implements ReceiveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_mailarap_order);
+
+        rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
+
         pageLoad=true;
 //        mContext = this;
 
@@ -123,7 +126,7 @@ public class MailarapOrderAdd extends Activity implements ReceiveListener {
         txtMFoodsRemark = findViewById(R.id.txtMFoodsRemark);
         txtMPassword = findViewById(R.id.txtMPassword);
         txtMQty = (com.hrules.horizontalnumberpicker.HorizontalNumberPicker)findViewById(R.id.txtMQty);
-//        txtMCntCust = (com.hrules.horizontalnumberpicker.HorizontalNumberPicker)findViewById(R.id.txtMCntCust);
+        txtMCntCust = (com.hrules.horizontalnumberpicker.HorizontalNumberPicker)findViewById(R.id.txtMCntCust);
         lvMOrder = findViewById(R.id.lvMOrder);
         chkMToGo = findViewById(R.id.chkMToGo);
         chkMInRes = findViewById(R.id.chkMInRes);
@@ -393,8 +396,7 @@ public class MailarapOrderAdd extends Activity implements ReceiveListener {
             }
         });
 
-        Intent intent = getIntent();
-        rs = (RestaurantControl) intent.getSerializableExtra("RestaurantControl");
+
         textSize = rs.TextSize.equals("")?16:Integer.parseInt(rs.TextSize);
         ArrayAdapter<String> adaTable = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboTable);
         ArrayAdapter<String> adaArea = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboArea);
@@ -447,6 +449,9 @@ public class MailarapOrderAdd extends Activity implements ReceiveListener {
         try {
             table1.clear();
             File file =getFileStreamPath("table.cnf");
+            if(file.exists()){
+
+            }
             final int READ_BLOCK_SIZE = 100;
             FileInputStream fileIn=openFileInput("table.cnf");
 //            FileInputStream fileIn=openFileInput(file.getPath());

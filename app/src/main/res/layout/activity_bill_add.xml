@@ -17,7 +17,7 @@
 
     <Spinner
         android:id="@+id/cboBaTable"
-        android:layout_width="102dp"
+        android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -25,8 +25,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:layout_width="136dp"
-        android:layout_height="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
@@ -50,20 +50,21 @@
 
     <ListView
         android:id="@+id/lvBaAdd"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cboBaTable" />
+        app:layout_constraintTop_toBottomOf="@id/cboBaArea" />
 
     <LinearLayout
         android:id="@+id/layout1"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +74,7 @@
             android:id="@+id/lbBaAmt"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="lbBaAmt" />
 
@@ -80,6 +82,7 @@
             android:id="@+id/lbBaAmt1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -87,7 +90,7 @@
 
     <LinearLayout
         android:id="@+id/layout2"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -100,6 +103,7 @@
             android:id="@+id/lbBaDiscount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="lbBaDiscount" />
 
@@ -107,6 +111,7 @@
             android:id="@+id/lbBaDiscount1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -114,7 +119,7 @@
 
     <LinearLayout
         android:id="@+id/layout3"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -127,6 +132,7 @@
             android:id="@+id/lbBaTotal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="lbBaTotal" />
 
@@ -134,6 +140,7 @@
             android:id="@+id/lbBaTotal1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -141,8 +148,10 @@
 
     <LinearLayout
         android:id="@+id/layout4"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,6 +161,7 @@
             android:id="@+id/lbBaSC"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="TextView" />
 
@@ -159,6 +169,7 @@
             android:id="@+id/lbBaSC1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -166,7 +177,7 @@
 
     <LinearLayout
         android:id="@+id/layout5"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -179,6 +190,7 @@
             android:id="@+id/lbBaVat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="TextView" />
 
@@ -186,6 +198,7 @@
             android:id="@+id/lbBaVat1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -193,7 +206,7 @@
 
     <LinearLayout
         android:id="@+id/layout6"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -206,6 +219,7 @@
             android:id="@+id/lbBaNetTotal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="TextView" />
 
@@ -213,6 +227,7 @@
             android:id="@+id/lbBaNetTotal1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -220,8 +235,8 @@
 
     <LinearLayout
         android:id="@+id/layout7"
-        android:layout_width="344dp"
-        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:orientation="horizontal"
@@ -233,16 +248,17 @@
             android:id="@+id/lbBaCashReceive"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="lbBaCashReceive" />
 
         <EditText
             android:id="@+id/txtBaCashReceive"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="numberSigned"
             android:text="Name"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
@@ -251,7 +267,7 @@
 
     <LinearLayout
         android:id="@+id/layout8"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -264,6 +280,7 @@
             android:id="@+id/lbBaCashTon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
             android:text="lbBaCashTon" />
 
@@ -271,6 +288,7 @@
             android:id="@+id/txtBaCashTon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingRight="8dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="textEnd" />
@@ -297,7 +315,7 @@
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="numberSigned"
         android:text="txtBaUserPassword"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
