@@ -46,9 +46,9 @@
         <activity android:name=".UserViewActivity" />
         <activity android:name=".UserAddActivity" />
         <activity android:name=".BillVoidActivity" />
-        <activity android:name=".TableChangeActivity"/>
-        <activity android:name=".MailarapOrderAdd">
-        </activity>
+        <activity android:name=".TableChangeActivity" />
+        <activity android:name=".MailarapOrderAdd"></activity>
+        <activity android:name=".FoodsCatViewActivity"></activity>
     </application>
 
 </manifest>
