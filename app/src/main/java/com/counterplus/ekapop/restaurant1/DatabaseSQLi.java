@@ -39,6 +39,8 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
     BillDetail bid = new BillDetail();
     CloseDay cd = new CloseDay();
     TableChange tc = new TableChange();
+    FoodsSpecific fs = new FoodsSpecific();
+    FoodsCategory fc = new FoodsCategory();
 
     Context c;
     SQLiteDatabase mDb;
@@ -59,6 +61,8 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         String typeID1 = UUID.randomUUID().toString();
         String typeID2 = UUID.randomUUID().toString();
         String arID = UUID.randomUUID().toString();
+        String catID1 = UUID.randomUUID().toString();
+        String catID2 = UUID.randomUUID().toString();
 
         cAr=da.creaT+" "+da.tbNameRes+" "
                 +"( "+ar.dbID+"' "+da.tex+" PRIMARY KEY "
@@ -114,8 +118,18 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             Log.d("onCreate ",ft.cFoodsTypeSQLi);
             db.execSQL(ft.cDropFoodsType);
             db.execSQL(ft.cFoodsTypeSQLi);
-            db.execSQL("Insert Into "+da.tbNameFoodsType+" ("+ft.dbID+", "+ft.dbCode+", "+ft.dbName+", "+ft.dbActive+", "+ar.dbDateCreate+","+ar.dbHostId+") Values('"+typeID1+"','01', 'ประเภทอาหาร1','1',"+ gendate +",'"+hostID+"');");
-            db.execSQL("Insert Into "+da.tbNameFoodsType+" ("+ft.dbID+", "+ft.dbCode+", "+ft.dbName+", "+ft.dbActive+", "+ar.dbDateCreate+","+ar.dbHostId+") Values('"+typeID2+"','02', 'ประเภทอาหาร2','1',"+ gendate +",'"+hostID+"');");
+            db.execSQL("Insert Into "+da.tbNameFoodsType+" ("+ft.dbID+", "+ft.dbCode+", "+ft.dbName+", "+ft.dbActive+", "+ft.dbDateCreate+","+ft.dbHostId+") Values('"+typeID1+"','01', 'ประเภทอาหาร1','1',"+ gendate +",'"+hostID+"');");
+            db.execSQL("Insert Into "+da.tbNameFoodsType+" ("+ft.dbID+", "+ft.dbCode+", "+ft.dbName+", "+ft.dbActive+", "+ft.dbDateCreate+","+ft.dbHostId+") Values('"+typeID2+"','02', 'ประเภทอาหาร2','1',"+ gendate +",'"+hostID+"');");
+
+            Log.d("onCreate ",fc.cFoodsCatSQLi);
+            db.execSQL(fc.cDropCatType);
+            db.execSQL(fc.cFoodsCatSQLi);
+            db.execSQL("Insert Into "+da.tbNameFoodsCat+" ("+fc.dbID+", "+fc.dbCode+", "+fc.dbName+", "+fc.dbActive+", "+fc.dbDateCreate+","+fc.dbHostId+") Values('"+catID1+"','01', 'กลุ่มอาหาร1','1',"+ gendate +",'"+hostID+"');");
+            db.execSQL("Insert Into "+da.tbNameFoodsCat+" ("+fc.dbID+", "+fc.dbCode+", "+fc.dbName+", "+fc.dbActive+", "+fc.dbDateCreate+","+fc.dbHostId+") Values('"+catID2+"','02', 'กลุ่มอาหาร2','1',"+ gendate +",'"+hostID+"');");
+
+            Log.d("onCreate ",fs.cFoodsSpecificSQLi);
+            db.execSQL(fs.cDropFoodsSpecific);
+            db.execSQL(fs.cFoodsSpecificSQLi);
 
             Log.d("onCreate ",bi.cBillSQLi);
             db.execSQL(bi.cDropBill);
