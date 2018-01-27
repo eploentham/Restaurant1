@@ -199,7 +199,7 @@ public class TableAddActivity extends AppCompatActivity {
                 }
             }
         });
-//        new retrieveFoodsType().execute();
+//        new retrieveFoodsCat().execute();
         if(rs.taID.equals("")) chkTaActive.setChecked(true);
         setTheme();
     }

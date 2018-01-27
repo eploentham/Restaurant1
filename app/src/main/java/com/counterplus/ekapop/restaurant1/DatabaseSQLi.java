@@ -501,6 +501,27 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //        jarr = new JSONArray(json);
         return  jarr;
     }
+    public JSONArray FoodsCatSelectAll(){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsCat+" Where "+ft.dbActive+" = '1' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectFoodsType(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
 
 
     private JSONObject getJsonObjectFoodsType(Cursor c) {

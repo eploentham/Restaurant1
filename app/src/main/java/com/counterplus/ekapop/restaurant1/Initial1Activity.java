@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 public class Initial1Activity extends AppCompatActivity {
     Button btnIa1FoodsTypeView,btnIa1FoodsView, btnIa1BillVoid, btnIa1TableChange, btnIa1TableMerge,btnIa1User;
-    Button btnIa1TableView,btnIa1AreaView, btnIa1ResView;
+    Button btnIa1TableView,btnIa1AreaView, btnIa1ResView, btnIa1FoodsCatView, btnIa1FoodsSpecView, btnIa1PrinterView;
 
     public RestaurantControl rs;
 
@@ -29,6 +29,9 @@ public class Initial1Activity extends AppCompatActivity {
         btnIa1TableView = findViewById(R.id.btnIa1TableView);
         btnIa1AreaView = findViewById(R.id.btnIa1AreaView);
         btnIa1ResView = findViewById(R.id.btnIa1ResView);
+        btnIa1FoodsCatView = findViewById(R.id.btnIa1FoodsCatView);
+        btnIa1FoodsSpecView = findViewById(R.id.btnIa1FoodsSpecView);
+        btnIa1PrinterView = findViewById(R.id.btnIa1PrinterView);
 
         btnIa1FoodsTypeView.setText(getResources().getString(R.string.add)+getResources().getString(R.string.type)+getResources().getString(R.string.foods));
         btnIa1FoodsView.setText(R.string.foodsadd);
@@ -39,6 +42,9 @@ public class Initial1Activity extends AppCompatActivity {
         btnIa1User.setText(R.string.user);
         btnIa1TableView.setText(R.string.btnIa1TableView);
         btnIa1AreaView.setText(R.string.btnIa1AreaView);
+        btnIa1FoodsCatView.setText(R.string.btnIa1FoodsCatView);
+        btnIa1FoodsSpecView.setText(R.string.btnIa1FoodsSpecView);
+        btnIa1PrinterView.setText(R.string.btnIa1PrinterView);
 
         btnIa1ResView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +92,12 @@ public class Initial1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(view.getContext(), TableChangeActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnIa1FoodsCatView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), FoodsCatViewActivity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
     }

@@ -28,8 +28,8 @@ public class FoodsCatViewActivity extends AppCompatActivity {
     JSONObject jobj = null;
     JSONArray jarrFt;
     private RestaurantControl rs;
-    ListView lvFtView;
-    Button btnFtAdd;
+    ListView lvFcView;
+    Button btnFcAdd;
     Boolean pageLoad=false;
     public ArrayList<FoodsType> lRes = new ArrayList<FoodsType>();
     private ArrayAdapter<String> adapter;
@@ -43,15 +43,15 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foods_cat_view);
 
         pageLoad = true;
-        lvFtView = (ListView)findViewById(R.id.lvFtView);
-        lvFtView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
+        lvFcView = findViewById(R.id.lvFcView);
+        lvFcView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
         rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
         daS = new DatabaseSQLi(this,"");
 
-        btnFtAdd = (Button)findViewById(R.id.btnFtAdd);
-        btnFtAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.foodstype));
-        btnFtAdd.setOnClickListener(new View.OnClickListener() {
+        btnFcAdd = findViewById(R.id.btnFcAdd);
+        btnFcAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.foodstype));
+        btnFcAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rs.ftID ="";
@@ -60,7 +60,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
                 startActivityForResult(s1, 0);
             }
         });
-        lvFtView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvFcView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try{
@@ -84,24 +84,24 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrFt = daS.FoodsTypeSelectAll();
+                jarrFt = daS.FoodsCatSelectAll();
                 setLvFoodsType();
             }
         }else if(rs.AccessMode.equals("Internet")){
             if(!pageLoad){
                 super.onResume();
-                new FoodsCatViewActivity.retrieveFoodsType().execute();
+                new retrieveFoodsCat().execute();
                 setLvFoodsType();
             }
         }else{
             if(!pageLoad){
                 super.onResume();
-                new FoodsCatViewActivity.retrieveFoodsType().execute();
+                new retrieveFoodsCat().execute();
                 setLvFoodsType();
             }
         }
     }
-    class retrieveFoodsType extends AsyncTask<String,String,String> {
+    class retrieveFoodsCat extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
@@ -178,7 +178,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
                     }
                 };
                 //lvAvView = (ListView)findViewById(R.genid.lvFoods);
-                lvFtView.setAdapter(adapter);
+                lvFcView.setAdapter(adapter);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block

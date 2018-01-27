@@ -228,7 +228,7 @@ public class UserAddActivity extends AppCompatActivity {
                 }
             }
         });
-//        new retrieveFoodsType().execute();
+//        new retrieveFoodsCat().execute();
         if(rs.usID.equals("")) chkUaActive.setChecked(true);
         setTheme();
     }

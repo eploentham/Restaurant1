@@ -191,7 +191,7 @@ public class FoodsTypeAddActivity extends AppCompatActivity {
                 }
             }
         });
-//        new retrieveFoodsType().execute();
+//        new retrieveFoodsCat().execute();
         if(rs.ftID.equals("")) chkFtaActive.setChecked(true);
         setTheme();
     }
