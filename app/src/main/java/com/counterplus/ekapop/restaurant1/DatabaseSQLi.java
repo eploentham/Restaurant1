@@ -504,7 +504,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
     public JSONArray FoodsCatSelectAll(){
         JSONArray jarr = new JSONArray();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsCat+" Where "+ft.dbActive+" = '1' ", null);
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsCat+" Where "+fc.dbActive+" = '1' ", null);
         if(c.moveToFirst()){
             do{
 //                JSONObject jsonObj = getJsonObjectFoodsType(c);
@@ -513,7 +513,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //                String column2 = c.getString(1);
 //                String column3 = c.getString(2);
                 //Do something Here with values
-                jarr.put(getJsonObjectFoodsType(c));
+                jarr.put(getJsonObjectFoodsCat(c));
 
             }while(c.moveToNext());
         }
@@ -522,7 +522,29 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //        jarr = new JSONArray(json);
         return  jarr;
     }
+    private JSONObject getJsonObjectFoodsCat(Cursor c) {
+        JSONObject jsonObj = new JSONObject();
+        try {
+            jsonObj.put(fc.dbID, c.getString(c.getColumnIndex(fc.dbID)));
+            jsonObj.put(fc.dbCode, chkNull(c.getString(c.getColumnIndex(fc.dbCode)))?"":c.getString(c.getColumnIndex(fc.dbCode)));
+            jsonObj.put(fc.dbName, chkNull(c.getString(c.getColumnIndex(fc.dbName)))?"":c.getString(c.getColumnIndex(fc.dbName)));
+            jsonObj.put(fc.dbActive, chkNull(c.getString(c.getColumnIndex(fc.dbActive)))?"":c.getString(c.getColumnIndex(fc.dbActive)));
+            jsonObj.put(fc.dbRemark, chkNull(c.getString(c.getColumnIndex(fc.dbRemark)))?"":c.getString(c.getColumnIndex(fc.dbRemark)));
+            jsonObj.put(fc.dbSort1, chkNull(c.getString(c.getColumnIndex(fc.dbSort1)))?"":c.getString(c.getColumnIndex(fc.dbSort1)));
+            jsonObj.put(fc.dbDateCreate, chkNull(c.getString(c.getColumnIndex(fc.dbDateCreate)))?"":c.getString(c.getColumnIndex(fc.dbDateCreate)));
+            jsonObj.put(fc.dbDateModi, chkNull(c.getString(c.getColumnIndex(fc.dbDateModi)))?"":c.getString(c.getColumnIndex(fc.dbDateModi)));
+            jsonObj.put(fc.dbHostId, chkNull(c.getString(c.getColumnIndex(fc.dbHostId)))?"":c.getString(c.getColumnIndex(fc.dbHostId)));
+            jsonObj.put(fc.dbBranchId, chkNull(c.getString(c.getColumnIndex(fc.dbBranchId)))?"":c.getString(c.getColumnIndex(fc.dbBranchId)));
+            jsonObj.put(fc.dbDeviceId, chkNull(c.getString(c.getColumnIndex(fc.dbDeviceId)))?"":c.getString(c.getColumnIndex(fc.dbDeviceId)));
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+        }catch (Exception e){
+            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+        }
+        return jsonObj;
+    }
 
     private JSONObject getJsonObjectFoodsType(Cursor c) {
         JSONObject jsonObj = new JSONObject();
@@ -541,9 +563,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("AreaSelectAll ",e.getMessage());
+            Log.e("getJsonObjectFoodsType ",e.getMessage());
         }catch (Exception e){
-            Log.e("AreaSelectAll ",e.getMessage());
+            Log.e("getJsonObjectFoodsType ",e.getMessage());
         }
         return jsonObj;
     }
@@ -615,9 +637,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("AreaSelectAll ",e.getMessage());
+            Log.e("getJsonObjectFoods ",e.getMessage());
         }catch (Exception e){
-            Log.e("AreaSelectAll ",e.getMessage());
+            Log.e("getJsonObjectFoods ",e.getMessage());
         }
         return jsonObj;
     }
@@ -1590,13 +1612,13 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             sql = "update "+da.tbNameFoodsType+" Set "+ft.dbActive+" = '3', "+ft.dbVoidUser+" = '"+user+"', "+ft.dbVoidDate+" = "+gendate+" Where "+ft.dbID+" = '"+id+"' ";
             db.execSQL(sql);
         }catch (Exception e) {
-            Log.d("FoodsTypeVoid 1 ", e.getMessage());
+            Log.d("FoodsCategoryVoid 1 ", e.getMessage());
         }
         db.close();
         try{
             jsonObj = new JSONObject();
             jsonObj.put("success", "1");
-            jsonObj.put("message", "Void FoodsTypeVoid success");
+            jsonObj.put("message", "Void FoodsCategoryVoid success");
             jsonObj.put("sql", sql);
             jsonObj.put("error", err);
             jsonObj.put("status", "1");

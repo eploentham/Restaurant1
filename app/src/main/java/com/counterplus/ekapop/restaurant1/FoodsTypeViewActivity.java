@@ -43,13 +43,13 @@ public class FoodsTypeViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foods_type_view);
 
         pageLoad = true;
-        lvFtView = (ListView)findViewById(R.id.lvFtView);
+        lvFtView = findViewById(R.id.lvFtView);
         lvFtView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
         rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
         daS = new DatabaseSQLi(this,"");
 
-        btnFtAdd = (Button)findViewById(R.id.btnFtAdd);
+        btnFtAdd = findViewById(R.id.btnFtAdd);
         btnFtAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.foodstype));
         btnFtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +80,7 @@ public class FoodsTypeViewActivity extends AppCompatActivity {
 
         pageLoad=false;
     }
+    @Override
     protected void onResume() {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
@@ -141,7 +142,7 @@ public class FoodsTypeViewActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //jarrR = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
             //jarrR = jsonparser.getJSONFromUrl(rs.hostGetRes,params);
-            if(jarrFt!=null){
+            if(jarrFt !=null){
                 //jarrR =  new JSONArray(rs.jarrR);
                 arrayList = new ArrayList<String>();
                 //JSONArray categories = jobj.getJSONArray("area");

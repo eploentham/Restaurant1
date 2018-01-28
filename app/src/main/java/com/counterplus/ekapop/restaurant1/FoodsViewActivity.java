@@ -93,6 +93,7 @@ public class FoodsViewActivity extends AppCompatActivity {
         //setLvFoods();
         pageLoad=false;
     }
+    @Override
     protected void onResume() {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {

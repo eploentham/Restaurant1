@@ -47,8 +47,10 @@
         <activity android:name=".UserAddActivity" />
         <activity android:name=".BillVoidActivity" />
         <activity android:name=".TableChangeActivity" />
-        <activity android:name=".MailarapOrderAdd"></activity>
-        <activity android:name=".FoodsCatViewActivity"></activity>
+        <activity android:name=".MailarapOrderAdd" />
+        <activity android:name=".FoodsCatViewActivity" />
+        <activity android:name=".FoodsPrintViewActivity" />
+        <activity android:name=".FoodsCatAddActivity"></activity>
     </application>
 
 </manifest>

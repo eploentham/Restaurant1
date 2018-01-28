@@ -26,12 +26,12 @@ public class FoodsCatViewActivity extends AppCompatActivity {
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrFt;
+    JSONArray jarrFc;
     private RestaurantControl rs;
     ListView lvFcView;
     Button btnFcAdd;
     Boolean pageLoad=false;
-    public ArrayList<FoodsType> lRes = new ArrayList<FoodsType>();
+    public ArrayList<FoodsCategory> lRes = new ArrayList<FoodsCategory>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
     ProgressDialog pd;
@@ -50,7 +50,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         daS = new DatabaseSQLi(this,"");
 
         btnFcAdd = findViewById(R.id.btnFcAdd);
-        btnFcAdd.setText(getResources().getString(R.string.add)+getResources().getString(R.string.foodstype));
+        btnFcAdd.setText(R.string.btnIa1FoodsCatView);
         btnFcAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +64,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try{
-                    JSONObject catObj = (JSONObject) jarrFt.get(i);
+                    JSONObject catObj = (JSONObject) jarrFc.get(i);
                     //String ID = catObj.getString("foods_id");
                     rs.ftID = catObj.getString("foods_type_id");
                 }catch (JSONException e) {
@@ -80,24 +80,25 @@ public class FoodsCatViewActivity extends AppCompatActivity {
 
         pageLoad=false;
     }
+    @Override
     protected void onResume() {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrFt = daS.FoodsCatSelectAll();
-                setLvFoodsType();
+                jarrFc = daS.FoodsCatSelectAll();
+                setLvFoodsCat();
             }
         }else if(rs.AccessMode.equals("Internet")){
             if(!pageLoad){
                 super.onResume();
                 new retrieveFoodsCat().execute();
-                setLvFoodsType();
+                setLvFoodsCat();
             }
         }else{
             if(!pageLoad){
                 super.onResume();
                 new retrieveFoodsCat().execute();
-                setLvFoodsType();
+                setLvFoodsCat();
             }
         }
     }
@@ -109,7 +110,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
-            jarrFt = jsonparser.getJSONFromUrl(rs.hostGetFoodsType,params);
+            jarrFc = jsonparser.getJSONFromUrl(rs.hostGetFoodsType,params);
             //rs.jarrR = jarrR.toString();
             //} catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -120,7 +121,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String a = ab;
-            setLvFoodsType();
+            setLvFoodsCat();
             pd.dismiss();
         }
         @Override
@@ -136,20 +137,20 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             pd.show();
         }
     }
-    private void setLvFoodsType(){
+    private void setLvFoodsCat(){
         try {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //jarrR = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
             //jarrR = jsonparser.getJSONFromUrl(rs.hostGetRes,params);
-            if(jarrFt!=null){
+            if(jarrFc !=null){
                 //jarrR =  new JSONArray(rs.jarrR);
                 arrayList = new ArrayList<String>();
                 //JSONArray categories = jobj.getJSONArray("area");
                 //JSONArray json = new JSONArray(jobj);
                 lRes.clear();
-                for (int i = 0; i < jarrFt.length(); i++) {
-                    JSONObject catObj = (JSONObject) jarrFt.get(i);
-                    FoodsType a = new FoodsType();
+                for (int i = 0; i < jarrFc.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrFc.get(i);
+                    FoodsCategory a = new FoodsCategory();
                     a.ID = catObj.getString(a.dbID);
                     a.Code = catObj.getString(a.dbCode);
                     a.Name = catObj.getString(a.dbName);
