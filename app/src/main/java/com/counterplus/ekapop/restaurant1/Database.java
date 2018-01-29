@@ -7,7 +7,7 @@ package com.counterplus.ekapop.restaurant1;
 public class Database {
     public String dbNameD="restaurant", tbNameArea="b_area", tbNameFoods="b_foods", tbNameFoodsType="b_foods_type", tbNamePrinterName="b_printername", tbNameRes="b_restaurant";
     public String tbNameTable="b_table", tbNameUser="b_user", tbNameBill="t_bill", tbNameBillDetail="t_bill_detail", tbNameCloseday="t_closeday", tbNameOrder="t_order";
-    public String tbNameTableChange="t_tablechange", tbNameFoodsSpecific="b_foods_specific", tbNameFoodsCat="b_foods_category";
+    public String tbNameTableChange="t_tablechange", tbNameFoodsSpecific="b_foods_specific", tbNameFoodsCat="b_foods_category", tbNameFoodsPrint="b_foods_print";
 
     public String dbDateCreate="date_create", dbDateModi="date_modi", dbHostId="host_id", dbBranchId="branch_id", dbDeviceId="device_id";
 

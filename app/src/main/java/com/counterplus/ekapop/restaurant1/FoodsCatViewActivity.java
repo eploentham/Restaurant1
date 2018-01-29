@@ -55,7 +55,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 rs.ftID ="";
-                Intent s1 = new Intent(view.getContext(), FoodsTypeAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), FoodsCatAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }

@@ -1,14 +1,17 @@
 package com.counterplus.ekapop.restaurant1;
 
 /**
- * Created by ekapop on 1/26/2018.
+ * Created by ekapop on 1/29/2018.
  */
 
-public class FoodsCategory extends Database {
+public class FoodsPrint extends Database {
     public String ID="", Code="", Name="", Remark="", Active="", Sort1="", VoidDate="", VoidUser="";
-    public String dbID="foods_cat_id", dbCode="foods_cat_code", dbName="foods_cat_name", dbRemark="remark", dbActive="active", dbSort1="sort1", dbVoidDate="void_date", dbVoidUser="void_user";
+    public String dbID="foods_print_id", dbCode="foods_print_code", dbName="foods_print_name", dbRemark="remark", dbActive="active", dbSort1="sort1", dbVoidDate="void_date", dbVoidUser="void_user";
 
-    public String cFoodsCatMySQL=creaT+" '"+dbNameD+"'.'"+tbNameFoodsCat+"' "
+    public String IP="", PrintBrand="", PrintModel="";
+    public String dbIP="ip", dbPrintBrand="brand", dbPrintModel="model";
+
+    public String cFoodsPrintMySQL=creaT+" '"+dbNameD+"'.'"+tbNameFoodsPrint+"' "
             +"('"+dbID+"' "+varc+" NOT NULL "
             +", '"+dbCode+"' "+varc+"  NULL "+ defMySQL_v
             +", '"+dbName+"' "+varc+"  NULL "+ defMySQL_v
@@ -19,11 +22,14 @@ public class FoodsCategory extends Database {
             +" ENGINE = MyISAM "
             +" CHARACTER SET utf8 COLLATE utf8_bim "
             +"COMMENT = ''";
-    public String cFoodsCatSQLi=creaT+" "+tbNameFoodsCat+" "
+    public String cFoodsPrintSQLi=creaT+" "+tbNameFoodsPrint+" "
             +"( "+dbID+" "+tex+" PRIMARY KEY "
             +", "+dbCode+" "+tex+"  NULL "
             +", "+dbName+" "+tex+"  NULL "
             +", "+dbRemark+" "+tex+"  NULL "
+            +", "+dbIP+" "+tex+"  NULL "
+            +", "+dbPrintBrand+" "+tex+"  NULL "
+            +", "+dbPrintModel+" "+tex+"  NULL "
             +", "+dbActive+" "+tex+"  NULL "
             +", "+dbSort1+" "+tex+"  NULL "
             +", "+dbDateCreate+" "+tex+"  NULL "
@@ -34,5 +40,5 @@ public class FoodsCategory extends Database {
             +", "+dbVoidDate+" "+tex+"  NULL "
             +", "+dbVoidUser+" "+tex+"  NULL "
             +"); ";
-    public String cDropFoodsCat ="DROP TABLE IF EXISTS "+tbNameFoodsCat+" ;";
+    public String cDropFoodsPrint="DROP TABLE IF EXISTS "+tbNameFoodsPrint+" ;";
 }

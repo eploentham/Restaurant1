@@ -50,7 +50,8 @@
         <activity android:name=".MailarapOrderAdd" />
         <activity android:name=".FoodsCatViewActivity" />
         <activity android:name=".FoodsPrintViewActivity" />
-        <activity android:name=".FoodsCatAddActivity"></activity>
+        <activity android:name=".FoodsCatAddActivity" />
+        <activity android:name=".FoodsPrintAddActivity"></activity>
     </application>
 
 </manifest>

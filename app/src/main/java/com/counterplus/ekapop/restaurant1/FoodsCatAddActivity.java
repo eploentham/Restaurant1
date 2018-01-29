@@ -76,7 +76,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(rs.AccessMode.equals("Standalone")) {
                     getFoodsCategory();
-                    jarr = daS.FoodsTypeInsert(fc.ID, fc.Code, fc.Name, fc.Remark, fc.Sort1);
+                    jarr = daS.FoodsCategoryInsert(fc.ID, fc.Code, fc.Name, fc.Remark, fc.Sort1);
                     getFoodsCategoryInsert();
                 }else if(rs.AccessMode.equals("Internet")){
                     getFoodsCategory();
@@ -132,7 +132,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
                     if(rs.chkPasswordVoid(txtFcaPasswordVoid.getText().toString())){
 //                            String tableid = rs.getTable(cboBvTable.getSelectedItem().toString(),"genid");
                         if(rs.AccessMode.equals("Standalone")) {
-                            jarr = daS.FoodsTypeVoid(rs.chkUserByPassword(txtFcaPasswordVoid.getText().toString()), fc.ID);
+                            jarr = daS.FoodsCategoryVoid(rs.chkUserByPassword(txtFcaPasswordVoid.getText().toString()), fc.ID);
                             getFoodsCategoryVoid();
                         }else if(rs.AccessMode.equals("Internet")){
                             new FoodsCategoryVoid().execute(rs.chkUserByPassword(txtFcaPasswordVoid.getText().toString()), fc.ID);
@@ -191,7 +191,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
             }
             }
         });
-//        new retrieveFoodsCat().execute();
+//        new retrieveFoodsPrint().execute();
         if(rs.ftID.equals("")) chkFcaActive.setChecked(true);
         setTheme();
     }

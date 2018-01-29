@@ -221,7 +221,7 @@ public class ResAddActivity extends AppCompatActivity {
                 }
             }
         });
-//        new retrieveFoodsCat().execute();
+//        new retrieveFoodsPrint().execute();
         if(rs.resID.equals("")) chkRaActive.setChecked(true);
         setTheme();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

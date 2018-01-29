@@ -216,7 +216,7 @@ public class FoodsAddActivity extends AppCompatActivity {
                 }
             }
         });
-//        new retrieveFoodsCat().execute();
+//        new retrieveFoodsPrint().execute();
         if(rs.fooID.equals("")) chkFoodsActive.setChecked(true);
         setTheme();
     }
