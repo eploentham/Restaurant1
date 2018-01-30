@@ -395,6 +395,20 @@ public class RestaurantControl  extends Application implements Serializable {
         }
         return ab;
     }
+    public String getFoodsCategory(String foodsCatName, String flag){
+        String ab="";
+        for(int i=0;i<sFoodsCategory.size();i++){
+            String[] aa = sFoodsCategory.get(i).split("@");
+            if(foodsCatName.equals(aa[2])){
+                if(flag.equals("code")){
+                    ab = aa[1];
+                }else{
+                    ab = aa[0];
+                }
+            }
+        }
+        return ab;
+    }
     public String getFoodsType(String foodsTypeName, String flag){
         String ab="";
         for(int i=0;i<sFoodsType.size();i++){

@@ -27,10 +27,10 @@ import java.util.List;
 
 public class FoodsAddActivity extends AppCompatActivity {
 
-    TextView lbFaFoodsCode, lbFaFoodsName, lbFaFoodsPrice, lbFaFoodsRemark, lbFaResCode, lbPrinterName, lbFooActive,lbFaFoodsType;
+    TextView lbFaFoodsCode, lbFaFoodsName, lbFaFoodsPrice, lbFaFoodsRemark, lbFaResCode, lbPrinterName, lbFooActive,lbFaFoodsType, lbFaFoodsCat;
 
     EditText txtFaFoodsCode, txtFaFoodsName, txtFaFoodsPrice, txtFaFoodsRemark, txtFooPasswordVoid;
-    Spinner cboFaRes, cboFaFoodsType,cboFaPrinter;
+    Spinner cboFaRes, cboFaFoodsType,cboFaPrinter, cboFaFoodsCat;
     Switch chkFoodsActive;
     Button btnFoodsSave, btnFooVoid;
 
@@ -72,6 +72,8 @@ public class FoodsAddActivity extends AppCompatActivity {
         chkFoodsActive = findViewById(R.id.chkFoodsActive);
         btnFoodsSave = findViewById(R.id.btnFoodsSave);
         btnFooVoid = findViewById(R.id.btnFooVoid);
+        lbFaFoodsCat = findViewById(R.id.lbFaFoodsCat);
+        cboFaFoodsCat = findViewById(R.id.cboFaFoodsCat);
 
         lbFaFoodsCode.setText(R.string.code);
         lbFaFoodsName.setText(R.string.name);
@@ -81,6 +83,7 @@ public class FoodsAddActivity extends AppCompatActivity {
         lbPrinterName.setText(R.string.printername);
         lbFaFoodsType.setText(R.string.foodstype);
         lbFooActive.setText(R.string.active);
+        lbFaFoodsCat.setText(R.string.lbFaFoodsCat);
         //chkFoodsActive.setText(R.string.activeon);
         chkFoodsActive.setChecked(false);
         chkFoodsActive.setChecked(true);
@@ -97,6 +100,8 @@ public class FoodsAddActivity extends AppCompatActivity {
         cboFaPrinter.setAdapter(adaPrinter);
         ArrayAdapter<String> adaFoodsType = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboFoodsType);
         cboFaFoodsType.setAdapter(adaFoodsType);
+        ArrayAdapter<String> adaFoodsCat = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboFoodsCategory);
+        cboFaFoodsCat.setAdapter(adaFoodsCat);
 
         btnFoodsSave.setText(R.string.save);
         btnFoodsSave.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +270,7 @@ public class FoodsAddActivity extends AppCompatActivity {
     private void getFoods(){
         String resName = cboFaRes.getSelectedItem().toString();
         String foodsTypeName = cboFaFoodsType.getSelectedItem().toString();
+
         foo = new Foods();
         foo.ID = rs.fooID;
         foo.ResCode = rs.getRes(resName, "code");
@@ -276,6 +282,7 @@ public class FoodsAddActivity extends AppCompatActivity {
         foo.Price = txtFaFoodsPrice.getText().toString();
         foo.StatusFoods = "1";
         foo.TypeId=rs.getFoodsType(foodsTypeName,"genid");
+        foo.CatId=rs.getFoodsCategory(cboFaFoodsCat.getSelectedItem().toString(),"genid");
         foo.PrinterName = "";
         //foo.ResId="";
     }

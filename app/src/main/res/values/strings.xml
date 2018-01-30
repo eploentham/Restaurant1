@@ -128,6 +128,9 @@
     <string name="btnIa1FoodsSpecView">เพิ่มรายการเจาะจง</string>
     <string name="btnIa1PrinterView">เพิ่มเครื่องพิมพ์</string>
     <string name="lbFpaIP">IP</string>
+    <string name="lbFaFoodsCat">กลุ่มอาหาร</string>
+    <string name="lbFpaBrand">ยี่ห้อ</string>
+    <string name="lbFpaModel">รุ่น</string>
 
 
     <string name="january">มกราคม</string>

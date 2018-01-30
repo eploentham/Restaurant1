@@ -24,7 +24,7 @@ import java.util.List;
 
 public class FoodsPrintAddActivity extends AppCompatActivity {
 
-    TextView lbFpaCode, lbFpaName, lbFpaRemark, lbFpaSort1, lbFpaActive, lbFpaIP;
+    TextView lbFpaCode, lbFpaName, lbFpaRemark, lbFpaSort1, lbFpaActive, lbFpaIP, lbFpaBrand, lbFpaModel;
     EditText txtFpaCode, txtFpaName, txtFpaRemark, txtFpaSort1, txtFpaPasswordVoid, txtFpaIP;
     Switch chkFpaActive;
     Button btnFpaSave, btnFpaVoid;
@@ -65,6 +65,8 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         btnFpaVoid = findViewById(R.id.btnFpaVoid);
         chkFpaActive = findViewById(R.id.chkFpaActive);
         txtFpaIP = findViewById(R.id.txtFpaIP);
+        lbFpaBrand = findViewById(R.id.lbFpaBrand);
+        lbFpaModel = findViewById(R.id.lbFpaModel);
 
         lbFpaCode.setText(R.string.code);
         lbFpaName.setText(R.string.name);
@@ -74,6 +76,8 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         lbFpaIP.setText(R.string.lbFpaIP);
         btnFpaSave.setText(R.string.save);
         btnFpaVoid.setText(R.string.void1);
+        lbFpaModel.setText(R.string.lbFpaModel);
+        lbFpaBrand.setText(R.string.lbFpaBrand);
         btnFpaSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

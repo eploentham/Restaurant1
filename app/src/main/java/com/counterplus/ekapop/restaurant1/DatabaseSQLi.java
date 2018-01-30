@@ -926,7 +926,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         return  jarr;
     }
     public JSONArray FoodsInsert(String id, String code, String name, String price, String typeid, String remark
-            , String resid, String rescode, String statusfoods, String printname, String sort1, String hostid, String branchid){
+            , String resid, String rescode, String statusfoods, String printname, String sort1, String hostid, String branchid, String catid){
         String sql="",err="", code1="",foodsCode="", cnt="",id1="";
         JSONArray jarr = new JSONArray();
         JSONObject jsonObj = new JSONObject();
@@ -948,9 +948,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                 c.close();
                 foodsCode=foodsCode+code1;
                 sql = "Insert into "+foo.tbNameFoods+"("+foo.dbID+","+foo.dbCode+","+foo.dbName+","+foo.dbActive+","+foo.dbTypeId+","+foo.dbRemark+","+foo.dbResId+","+foo.dbStatusFoods+","
-                    +foo.dbPrinterName+","+foo.dbResCode+","+foo.dbPrice+","+foo.dbDateCreate+")"
+                    +foo.dbPrinterName+","+foo.dbResCode+","+foo.dbPrice+","+foo.dbCatId+","+foo.dbDateCreate+")"
                     +" Values ("+genid+",'"+code+"','"+foodsCode+"','1','"+typeid+"','"+remark+"','"
-                    +resid+"','"+statusfoods+"','"+printname+"','"+rescode+"',"+price+","+gendate+")";
+                    +resid+"','"+statusfoods+"','"+printname+"','"+rescode+"',"+price+"',"+catid+","+gendate+")";
             }else{
                 foodsCode = code;
                 sql="Update "+foo.tbNameFoods+" "
@@ -963,6 +963,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                 +","+foo.dbPrinterName+"='"+printname+"'"
                 +","+foo.dbResCode+"='"+rescode+"'"
                 +","+foo.dbPrice+"="+price+" "
+                +","+foo.dbCatId+"="+catid+" "
                 +"Where "+foo.dbID+"='"+id+"'";
             }
             db.execSQL(sql);
