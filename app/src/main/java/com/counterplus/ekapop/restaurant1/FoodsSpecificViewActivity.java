@@ -21,17 +21,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodsCatViewActivity extends AppCompatActivity {
+public class FoodsSpecificViewActivity extends AppCompatActivity {
 
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrFc;
+    JSONArray jarrFs;
     private RestaurantControl rs;
-    ListView lvFcView;
-    Button btnFcAdd;
+    ListView lvFsView;
+    Button btnFsAdd;
     Boolean pageLoad=false;
-    public ArrayList<FoodsCategory> lRes = new ArrayList<FoodsCategory>();
+    public ArrayList<FoodsSpecific> lRes = new ArrayList<FoodsSpecific>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
     ProgressDialog pd;
@@ -40,39 +40,40 @@ public class FoodsCatViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foods_cat_view);
+        setContentView(R.layout.activity_foods_specific_view);
 
         pageLoad = true;
-        lvFcView = findViewById(R.id.lvFcView);
-        lvFcView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
+        lvFsView = findViewById(R.id.lvFsView);
+        btnFsAdd = findViewById(R.id.btnFsAdd);
+
+        lvFsView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
         rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
         daS = new DatabaseSQLi(this,"");
 
-        btnFcAdd = findViewById(R.id.btnFcAdd);
-        btnFcAdd.setText(R.string.btnIa1FoodsCatView);
-        btnFcAdd.setOnClickListener(new View.OnClickListener() {
+        btnFsAdd.setText(R.string.btnIa1FoodsSpecView);
+        btnFsAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rs.ftID ="";
-                Intent s1 = new Intent(view.getContext(), FoodsCatAddActivity.class);
+                rs.fsID ="";
+                Intent s1 = new Intent(view.getContext(), FoodsSpecificAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
         });
-        lvFcView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvFsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try{
-                    JSONObject catObj = (JSONObject) jarrFc.get(i);
+                    JSONObject catObj = (JSONObject) jarrFs.get(i);
                     //String ID = catObj.getString("foods_id");
-                    rs.fcID = catObj.getString("foods_cat_id");
+                    rs.fsID = catObj.getString("foods_spec_id");
                 }catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
-                Intent s1 = new Intent(view.getContext(), FoodsCatAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), FoodsSpecificAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
@@ -85,24 +86,24 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrFc = daS.FoodsCatSelectAll();
-                setLvFoodsCat();
+                jarrFs = daS.FoodsSpecificSelectAll();
+                setLvFoodsSpecific();
             }
         }else if(rs.AccessMode.equals("Internet")){
             if(!pageLoad){
                 super.onResume();
-                new retrieveFoodsCat().execute();
-                setLvFoodsCat();
+                new FoodsSpecificViewActivity.retrieveFoodsPrint().execute();
+                setLvFoodsSpecific();
             }
         }else{
             if(!pageLoad){
                 super.onResume();
-                new retrieveFoodsCat().execute();
-                setLvFoodsCat();
+                new FoodsSpecificViewActivity.retrieveFoodsPrint().execute();
+                setLvFoodsSpecific();
             }
         }
     }
-    class retrieveFoodsCat extends AsyncTask<String,String,String> {
+    class retrieveFoodsPrint extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
@@ -110,7 +111,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
-            jarrFc = jsonparser.getJSONFromUrl(rs.hostGetFoodsType,params);
+            jarrFs = jsonparser.getJSONFromUrl(rs.hostGetFoodsType,params);
             //rs.jarrR = jarrR.toString();
             //} catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -121,12 +122,12 @@ public class FoodsCatViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String a = ab;
-            setLvFoodsCat();
+            setLvFoodsSpecific();
             pd.dismiss();
         }
         @Override
         protected void onPreExecute() {
-            pd = new ProgressDialog(FoodsCatViewActivity.this);
+            pd = new ProgressDialog(FoodsSpecificViewActivity.this);
             pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             pd.setTitle("Loading...");
             pd.setMessage("Loading Bill ...");
@@ -137,30 +138,31 @@ public class FoodsCatViewActivity extends AppCompatActivity {
             pd.show();
         }
     }
-    private void setLvFoodsCat(){
+    private void setLvFoodsSpecific(){
         try {
+            String fooName="";
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //jarrR = jsonparser.getJSONFromUrl(rs.hostSelectFoods,params);
             //jarrR = jsonparser.getJSONFromUrl(rs.hostGetRes,params);
-            if(jarrFc !=null){
+            if(jarrFs !=null){
                 //jarrR =  new JSONArray(rs.jarrR);
                 arrayList = new ArrayList<String>();
                 //JSONArray categories = jobj.getJSONArray("area");
                 //JSONArray json = new JSONArray(jobj);
                 lRes.clear();
-                for (int i = 0; i < jarrFc.length(); i++) {
-                    JSONObject catObj = (JSONObject) jarrFc.get(i);
-                    FoodsCategory a = new FoodsCategory();
+                for (int i = 0; i < jarrFs.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrFs.get(i);
+                    FoodsSpecific a = new FoodsSpecific();
                     a.ID = catObj.getString(a.dbID);
                     a.Code = catObj.getString(a.dbCode);
                     a.Name = catObj.getString(a.dbName);
-                    a.Remark = catObj.getString(a.dbRemark);
                     a.Active = catObj.getString(a.dbActive);
-                    //a.AreaID = catObj.getString("area_id");
                     a.Sort1 = catObj.getString(a.dbSort1);
+                    a.FoodsCode = catObj.getString(a.dbFoodsCode);
+                    fooName = rs.getFoodsToName(a.FoodsCode,"code");
                     lRes.add(a);
                     //arrayList.add(f.Code+" "+f.Name+" "+f.Price+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
-                    arrayList.add(a.Code+" "+a.Name+" "+a.Remark);
+                    arrayList.add(fooName+" "+a.Code+" "+a.Name);
                 }
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList){
                     @Override
@@ -179,7 +181,7 @@ public class FoodsCatViewActivity extends AppCompatActivity {
                     }
                 };
                 //lvAvView = (ListView)findViewById(R.genid.lvFoods);
-                lvFcView.setAdapter(adapter);
+                lvFsView.setAdapter(adapter);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block

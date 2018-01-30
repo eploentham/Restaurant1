@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrA, jarrT, jarrR, jarrF,jarrU, jarrP, jarrFt;
+    JSONArray jarrA, jarrT, jarrR, jarrF,jarrU, jarrP, jarrFt, jarrFc, jarrFs, jarrFp;
     //Button btnMInt;
     ImageButton btnMBill, btnMOrderV,btnCookV,btnOrderA, btnMCloseDay, btnMInt,btnMReport;
     ImageView imageRes, imageArea,imageTable,imageFoods,imageFoodsType, imageUser;
@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     User us = new User();
     Table ta = new Table();
     FoodsType ft = new FoodsType();
+    FoodsCategory fc = new FoodsCategory();
+    FoodsPrint fp = new FoodsPrint();
+    FoodsSpecific fs = new FoodsSpecific();
     Area ar = new Area();
     Foods foo = new Foods();
     Restaurant res = new Restaurant();
@@ -210,7 +213,12 @@ public class MainActivity extends AppCompatActivity {
             setFoods();
             jarrFt = daS.FoodsTypeSelectAll();
             setFoodsType();
-
+            jarrFc = daS.FoodsCatSelectAll();
+            setFoodsCategory();
+            jarrFs = daS.FoodsSpecificSelectAll();
+            setFoodsSpecific();
+            jarrFp = daS.FoodsPrintSelectAll();
+            setFoodsPrint();
 
         }else if(rs.AccessMode.equals("Internet")){
 //            rs.hostIP = "";
@@ -419,7 +427,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void setFoods(){
-        imageFoods.setImageResource(R.drawable.green1);
+        try {
+            if(jarrF!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboFoods.clear();
+                rs.sFoods.clear();
+                for (int i = 0; i < jarrF.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrF.get(i);
+                    rs.sCboFoods.add(catObj.getString(foo.dbName));
+                    rs.sFoods.add(catObj.getString(foo.dbID)+"@"+catObj.getString(foo.dbCode)+"@"+catObj.getString(foo.dbName));
+                }
+                imageFoods.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+
     }
     class retrievePrinterName extends AsyncTask<String,String,String>{
         @Override
@@ -495,6 +521,67 @@ public class MainActivity extends AppCompatActivity {
             Log.e("setFoodsType ",e.getMessage());
         }
     }
+    private void setFoodsCategory(){
+        try {
+            if(jarrFc!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboFoodsCategory.clear();
+                rs.sFoodsCategory.clear();
+                for (int i = 0; i < jarrFc.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrFc.get(i);
+                    rs.sCboFoodsCategory.add(catObj.getString(fc.dbName));
+                    rs.sFoodsCategory.add(catObj.getString(fc.dbID)+"@"+catObj.getString(fc.dbCode)+"@"+catObj.getString(fc.dbName));
+                }
+//                imageFoodsType.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+    }
+    private void setFoodsSpecific(){
+        try {
+            if(jarrFs!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboFoodsSpecific.clear();
+                rs.sFoodsSpec.clear();
+                for (int i = 0; i < jarrFs.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrFs.get(i);
+                    rs.sCboFoodsSpecific.add(catObj.getString(fs.dbName));
+                    rs.sFoodsSpec.add(catObj.getString(fs.dbID)+"@"+catObj.getString(fs.dbCode)+"@"+catObj.getString(fs.dbName));
+                }
+//                imageFoodsType.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+    }
+    private void setFoodsPrint(){
+        try {
+            if(jarrFs!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboFoodsPrint.clear();
+                rs.sFoodsPrint.clear();
+                for (int i = 0; i < jarrFp.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrFp.get(i);
+                    rs.sCboFoodsPrint.add(catObj.getString(fp.dbName));
+                    rs.sFoodsPrint.add(catObj.getString(fp.dbID)+"@"+catObj.getString(fp.dbCode)+"@"+catObj.getString(fp.dbName));
+                }
+//                imageFoodsType.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+    }
+
     class retrieveUser extends AsyncTask<String,String,String>{
         @Override
         protected String doInBackground(String... arg0) {

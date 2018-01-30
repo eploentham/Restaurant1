@@ -106,7 +106,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
             }
         });
         if(rs.AccessMode.equals("Standalone")) {
-            jarrF = daS.FoodsTypeSelectById(rs.ftID);
+            jarrF = daS.FoodsCategorySelectById(rs.fcID);
             setControl();
         }else if(rs.AccessMode.equals("Internet")){
             new retrieveFoodsCategory().execute();
@@ -192,7 +192,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
             }
         });
 //        new retrieveFoodsPrint().execute();
-        if(rs.ftID.equals("")) chkFcaActive.setChecked(true);
+        if(rs.fcID.equals("")) chkFcaActive.setChecked(true);
         setTheme();
     }
     private void setTheme(){
@@ -237,7 +237,7 @@ public class FoodsCatAddActivity extends AppCompatActivity {
     }
     private void getFoodsCategory(){
         fc = new FoodsCategory();
-        fc.ID = rs.ftID;
+        fc.ID = rs.fcID;
         //res.Sort1=txtRaSort1.getText().toString();
         fc.Active="1";
         fc.Code= txtFcaCode.getText().toString();

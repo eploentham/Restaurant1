@@ -127,6 +127,7 @@
     <string name="btnIa1FoodsCatView">เพิ่มกลุ่มอาหาร</string>
     <string name="btnIa1FoodsSpecView">เพิ่มรายการเจาะจง</string>
     <string name="btnIa1PrinterView">เพิ่มเครื่องพิมพ์</string>
+    <string name="lbFpaIP">IP</string>
 
 
     <string name="january">มกราคม</string>

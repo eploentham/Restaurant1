@@ -7,7 +7,7 @@
     tools:context="com.counterplus.ekapop.restaurant1.FoodsPrintAddActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lbFpaCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/txtFpaCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -27,21 +27,21 @@
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/lbFpaCode"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lbFpaName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaCode" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txtFpaName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -52,21 +52,21 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaName"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaCode" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/lbFpaIP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaName" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtFpaIP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -77,21 +77,21 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaIP"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaName" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/lbFpaBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaIP" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/cboFpaBrand"
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -99,21 +99,21 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaBrand"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaIP" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/lbFpaModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaBrand" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/txtFpaModel"
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -121,31 +121,31 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaModel"
+        app:layout_constraintTop_toBottomOf="@+id/cboFpaBrand" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/lbFpaActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaModel" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/chkFpaActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="Switch"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaActive"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/txtFpaPasswordVoid"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -153,11 +153,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/switch1"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintStart_toEndOf="@+id/chkFpaActive"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnFpaVoid"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -165,21 +165,21 @@
         android:layout_marginTop="20dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText5"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintStart_toEndOf="@+id/txtFpaPasswordVoid"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/lbFpaSort1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaActive" />
 
     <EditText
-        android:id="@+id/editText9"
+        android:id="@+id/txtFpaSort1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -190,11 +190,11 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintStart_toEndOf="@+id/lbFpaSort1"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaPasswordVoid" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnFpaSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -205,4 +205,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/lbFpaRemark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaSort1" />
+
+    <EditText
+        android:id="@+id/txtFpaRemark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbFpaRemark"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaSort1" />
 </android.support.constraint.ConstraintLayout>

@@ -485,6 +485,27 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //        jarr = new JSONArray(json);
         return  jarr;
     }
+    public JSONArray FoodsSpecificSelectAll(){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsSpecific+" Where "+fs.dbActive+" = '1' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectFoodsSpecific(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
     public JSONArray FoodsTypeSelectAll(){
         JSONArray jarr = new JSONArray();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -530,7 +551,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
     public JSONArray FoodsPrintSelectAll(){
         JSONArray jarr = new JSONArray();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsPrint+" Where "+fc.dbActive+" = '1' ", null);
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsPrint+" Where "+fp.dbActive+" = '1' ", null);
         if(c.moveToFirst()){
             do{
 //                JSONObject jsonObj = getJsonObjectFoodsType(c);
@@ -548,6 +569,29 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //        jarr = new JSONArray(json);
         return  jarr;
     }
+    private JSONObject getJsonObjectFoodsSpecific(Cursor c) {
+        JSONObject jsonObj = new JSONObject();
+        try {
+            jsonObj.put(fs.dbID, c.getString(c.getColumnIndex(fs.dbID)));
+            jsonObj.put(fs.dbCode, chkNull(c.getString(c.getColumnIndex(fs.dbCode)))?"":c.getString(c.getColumnIndex(fs.dbCode)));
+            jsonObj.put(fs.dbName, chkNull(c.getString(c.getColumnIndex(fs.dbName)))?"":c.getString(c.getColumnIndex(fs.dbName)));
+            jsonObj.put(fs.dbActive, chkNull(c.getString(c.getColumnIndex(fs.dbActive)))?"":c.getString(c.getColumnIndex(fs.dbActive)));
+            jsonObj.put(fs.dbFoodsCode, chkNull(c.getString(c.getColumnIndex(fs.dbFoodsCode)))?"":c.getString(c.getColumnIndex(fs.dbFoodsCode)));
+            jsonObj.put(fs.dbSort1, chkNull(c.getString(c.getColumnIndex(fs.dbSort1)))?"":c.getString(c.getColumnIndex(fs.dbSort1)));
+            jsonObj.put(fs.dbDateCreate, chkNull(c.getString(c.getColumnIndex(fs.dbDateCreate)))?"":c.getString(c.getColumnIndex(fs.dbDateCreate)));
+            jsonObj.put(fs.dbDateModi, chkNull(c.getString(c.getColumnIndex(fs.dbDateModi)))?"":c.getString(c.getColumnIndex(fs.dbDateModi)));
+            jsonObj.put(fs.dbHostId, chkNull(c.getString(c.getColumnIndex(fs.dbHostId)))?"":c.getString(c.getColumnIndex(fs.dbHostId)));
+            jsonObj.put(fs.dbBranchId, chkNull(c.getString(c.getColumnIndex(fs.dbBranchId)))?"":c.getString(c.getColumnIndex(fs.dbBranchId)));
+            jsonObj.put(fs.dbDeviceId, chkNull(c.getString(c.getColumnIndex(fs.dbDeviceId)))?"":c.getString(c.getColumnIndex(fs.dbDeviceId)));
+//            jsonObj.put(fs.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+        }catch (Exception e){
+            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+        }
+        return jsonObj;
+    }
     private JSONObject getJsonObjectFoodsPrint(Cursor c) {
         JSONObject jsonObj = new JSONObject();
         try {
@@ -562,7 +606,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jsonObj.put(fp.dbHostId, chkNull(c.getString(c.getColumnIndex(fp.dbHostId)))?"":c.getString(c.getColumnIndex(fp.dbHostId)));
             jsonObj.put(fp.dbBranchId, chkNull(c.getString(c.getColumnIndex(fp.dbBranchId)))?"":c.getString(c.getColumnIndex(fp.dbBranchId)));
             jsonObj.put(fp.dbDeviceId, chkNull(c.getString(c.getColumnIndex(fp.dbDeviceId)))?"":c.getString(c.getColumnIndex(fp.dbDeviceId)));
-
+            jsonObj.put(fp.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("getJsonObjectFoodsCat ",e.getMessage());
@@ -619,6 +663,48 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         return jsonObj;
     }
 
+    public JSONArray FoodsPrintSelectById(String id){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsPrint+" Where "+fp.dbID+" = '"+id+"' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectFoodsPrint(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
+    public JSONArray FoodsCategorySelectById(String id){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameFoodsCat+" Where "+fc.dbID+" = '"+id+"' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectFoodsCat(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
     public JSONArray FoodsTypeSelectById(String id){
         JSONArray jarr = new JSONArray();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -990,7 +1076,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             }
             db.execSQL(sql);
         }catch (Exception e){
-            Log.e("FoodsTypeInsert 1 ",e.getMessage());
+            Log.e("FoodsCategoryInsert 1 ",e.getMessage());
             err = e.getMessage();
         }
         db.close();
@@ -1003,6 +1089,103 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jarr.put(jsonObj);
         }catch (JSONException e) {
             Log.e("FoodsCategoryInsert 2 ",e.getMessage());
+        }
+        return  jarr;
+    }
+    public JSONArray FoodsPrintInsert(String id, String code, String name, String remark, String sort1, String ip ){
+        String sql="",err="", code1="";
+        JSONArray jarr = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
+        SQLiteDatabase db = this.getReadableDatabase();
+        try{
+            if(id.equals("")){
+                int cnt=0;
+                Cursor c = db.rawQuery("Select count(1) as cnt From "+da.tbNameFoodsPrint+" ", null);
+                if(c.moveToFirst()){
+                    do{
+                        Log.d("FTInsert rawQuery ",String.valueOf(c.getInt(c.getColumnIndex("cnt"))));
+                        cnt = c.getInt(c.getColumnIndex("cnt"))+1;
+                        code1 = "00"+cnt;
+                        code1 = code1.substring(code1.length()-2);
+                        Log.d("FoodsPrintInsert code1 ",code1);
+                    }while(c.moveToNext());
+                }
+                c.close();
+//                db.close();
+                sql ="Insert Into "+da.tbNameFoodsPrint+"("+fp.dbID+","+fp.dbCode+","+fp.dbName+","+fp.dbRemark+","+fp.dbSort1+","+fp.dbDateCreate+","+fp.dbActive+","+fp.dbIP+") "
+                        +"Values ("+this.genid +",'"+code1+"','"+name+"','"+remark+"','"+sort1+"',"+ gendate +",'1','"+ip+"')";
+            }else{
+                sql="Update "+da.tbNameFoodsPrint +" "
+                        +"Set "+fp.dbCode+"='"+code+"' "
+                        +","+fp.dbName+"='"+name+"' "
+                        +","+fp.dbRemark+"='"+remark+"' "
+                        +","+fp.dbSort1+"='"+sort1+"' "
+                        +","+fp.dbIP+"='"+ip+"' "
+                        +" Where "+fp.dbID+"='"+id+"'";
+            }
+            db.execSQL(sql);
+        }catch (Exception e){
+            Log.e("FoodsPrintInsert 1 ",e.getMessage());
+            err = e.getMessage();
+        }
+        db.close();
+        try{
+            jsonObj = new JSONObject();
+            jsonObj.put("success", "1");
+            jsonObj.put("message", "insert FoodsCategory success");
+            jsonObj.put("sql", sql);
+            jsonObj.put("error", err);
+            jarr.put(jsonObj);
+        }catch (JSONException e) {
+            Log.e("FoodsCategoryInsert 2 ",e.getMessage());
+        }
+        return  jarr;
+    }
+    public JSONArray FoodsSpecificInsert(String id, String code, String name, String foodscode, String sort1 ){
+        String sql="",err="", code1="";
+        JSONArray jarr = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
+        SQLiteDatabase db = this.getReadableDatabase();
+        try{
+            if(id.equals("")){
+                int cnt=0;
+                Cursor c = db.rawQuery("Select count(1) as cnt From "+da.tbNameFoodsSpecific+" ", null);
+                if(c.moveToFirst()){
+                    do{
+                        Log.d("FTInsert rawQuery ",String.valueOf(c.getInt(c.getColumnIndex("cnt"))));
+                        cnt = c.getInt(c.getColumnIndex("cnt"))+1;
+                        code1 = "00"+cnt;
+                        code1 = code1.substring(code1.length()-2);
+                        Log.d("FoodsTypeInsert code1 ",code1);
+                    }while(c.moveToNext());
+                }
+                c.close();
+//                db.close();
+                sql ="Insert Into "+da.tbNameFoodsSpecific+"("+fs.dbID+","+fs.dbCode+","+fs.dbName+","+fs.dbFoodsCode+","+fs.dbSort1+","+fs.dbDateCreate+","+fs.dbActive+") "
+                        +"Values ("+this.genid +",'"+code1+"','"+name+"','"+foodscode+"','"+sort1+"',"+ gendate +",'1')";
+            }else{
+                sql="Update "+da.tbNameFoodsSpecific +" "
+                        +"Set "+fs.dbCode+"='"+code+"' "
+                        +","+fs.dbName+"='"+name+"' "
+                        +","+fs.dbFoodsCode+"='"+foodscode+"' "
+                        +","+fs.dbSort1+"='"+sort1+"' "
+                        +" Where "+fs.dbID+"='"+id+"'";
+            }
+            db.execSQL(sql);
+        }catch (Exception e){
+            Log.e("FoodsSpecificInsert 1 ",e.getMessage());
+            err = e.getMessage();
+        }
+        db.close();
+        try{
+            jsonObj = new JSONObject();
+            jsonObj.put("success", "1");
+            jsonObj.put("message", "insert FoodsSpecific success");
+            jsonObj.put("sql", sql);
+            jsonObj.put("error", err);
+            jarr.put(jsonObj);
+        }catch (JSONException e) {
+            Log.e("FoodsSpecificInsert 2 ",e.getMessage());
         }
         return  jarr;
     }
@@ -1709,13 +1892,13 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             sql = "update "+da.tbNameFoodsType+" Set "+fc.dbActive+" = '3', "+fc.dbVoidUser+" = '"+user+"', "+fc.dbVoidDate+" = "+gendate+" Where "+fc.dbID+" = '"+id+"' ";
             db.execSQL(sql);
         }catch (Exception e) {
-            Log.d("FoodsCategoryVoid 1 ", e.getMessage());
+            Log.d("FoodsPrintVoid 1 ", e.getMessage());
         }
         db.close();
         try{
             jsonObj = new JSONObject();
             jsonObj.put("success", "1");
-            jsonObj.put("message", "Void FoodsCategoryVoid success");
+            jsonObj.put("message", "Void FoodsPrintVoid success");
             jsonObj.put("sql", sql);
             jsonObj.put("error", err);
             jsonObj.put("status", "1");
@@ -1735,13 +1918,13 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             sql = "update "+da.tbNameFoodsType+" Set "+ft.dbActive+" = '3', "+ft.dbVoidUser+" = '"+user+"', "+ft.dbVoidDate+" = "+gendate+" Where "+ft.dbID+" = '"+id+"' ";
             db.execSQL(sql);
         }catch (Exception e) {
-            Log.d("FoodsCategoryVoid 1 ", e.getMessage());
+            Log.d("FoodsPrintVoid 1 ", e.getMessage());
         }
         db.close();
         try{
             jsonObj = new JSONObject();
             jsonObj.put("success", "1");
-            jsonObj.put("message", "Void FoodsCategoryVoid success");
+            jsonObj.put("message", "Void FoodsPrintVoid success");
             jsonObj.put("sql", sql);
             jsonObj.put("error", err);
             jsonObj.put("status", "1");

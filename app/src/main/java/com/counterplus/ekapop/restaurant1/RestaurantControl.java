@@ -34,7 +34,11 @@ public class RestaurantControl  extends Application implements Serializable {
     public ArrayList<String> sCboRes = new ArrayList<String>();
     public ArrayList<String> sCboPrinter = new ArrayList<String>();
     public ArrayList<String> sCboTextSize = new ArrayList<String>();
+    public ArrayList<String> sCboFoods = new ArrayList<String>();
     public ArrayList<String> sCboFoodsType = new ArrayList<String>();
+    public ArrayList<String> sCboFoodsCategory = new ArrayList<String>();
+    public ArrayList<String> sCboFoodsSpecific = new ArrayList<String>();
+    public ArrayList<String> sCboFoodsPrint = new ArrayList<String>();
     public ArrayList<String> sCboUser = new ArrayList<String>();
     public ArrayList<String> sCboPrivilege = new ArrayList<String>();
     public ArrayList<String> sCboLanguage = new ArrayList<String>();
@@ -44,14 +48,18 @@ public class RestaurantControl  extends Application implements Serializable {
     public ArrayList<String> sTable = new ArrayList<String>();
     public ArrayList<String> sArea = new ArrayList<String>();
     public ArrayList<String> sRes = new ArrayList<String>();
+    public ArrayList<String> sFoods = new ArrayList<String>();
+    public ArrayList<String> sFoodsSpec = new ArrayList<String>();
+    public ArrayList<String> sFoodsPrint = new ArrayList<String>();
     //public ArrayList<String> sCboPrinter = new ArrayList<String>();
     public ArrayList<String> sFoodsType = new ArrayList<String>();
+    public ArrayList<String> sFoodsCategory = new ArrayList<String>();
     public ArrayList<String> sUser = new ArrayList<String>();
 
     public String ResName="", ReceiptH1="", ReceiptH2="", ReceiptF1="", ReceiptF2="", imei="";
 
     public String hostIP="", hostWebDirectory ="", hostPORT="80", UserDB="", PasswordDB ="",TextSize="",PrnO="",PrnB="",PrnC="";
-    public String fooID="", ordID="", ordLotID="", arID="", taID ="",resID="", ftID="", usID ="", AccessMode="", HostID="", Language="",AccessMethod="";
+    public String fooID="", ordID="", ordLotID="", arID="", taID ="",resID="", ftID="", fcID="", fpID="", fsID="", usID ="", AccessMode="", HostID="", Language="",AccessMethod="";
     public String hostSaveOrder="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"saveTOrder.php";
 
     public String hostDailyGroupByFoods="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"DailyGroupByFoods.php";
@@ -105,7 +113,7 @@ public class RestaurantControl  extends Application implements Serializable {
 
     public String hostFoodsTypeInsert ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeInsert.php";
     public String hostFoodsTypeUpdate ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeUpdate.php";
-    public String hostFoodsTypeVoid ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsCategoryVoid.php";
+    public String hostFoodsTypeVoid ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsPrintVoid.php";
     public String hostFoodsTypeSelectByID ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeSelectByID.php";
 
     public String hostFoodsCatInsert ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsCatInsert.php";
@@ -237,7 +245,7 @@ public class RestaurantControl  extends Application implements Serializable {
 
         hostFoodsTypeInsert ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeInsert.php";
         hostFoodsTypeUpdate ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeUpdate.php";
-        hostFoodsTypeVoid ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsCategoryVoid.php";
+        hostFoodsTypeVoid ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsPrintVoid.php";
         hostFoodsTypeSelectByID ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsTypeSelectByID.php";
 
         hostFoodsCatInsert ="http://"+hostIP+":"+hostPORT+"/"+ hostWebDirectory +"FoodsCatInsert.php";
@@ -271,6 +279,57 @@ public class RestaurantControl  extends Application implements Serializable {
         //sCboArea.add("ในร้าน");
         //sCboArea.add("ฟุตบาท");
         //sCboArea.add("ในสวน");
+    }
+    public String getFoodsSpecific(String fsName, String flag){
+        String ab="";
+        for(int i=0;i<sArea.size();i++){
+            String[] aa = sArea.get(i).split("@");
+            if(fsName.equals(aa[2])){
+                if(flag.equals("code")){
+                    ab = aa[1];
+                }else{
+                    ab = aa[0];
+                }
+            }
+        }
+        return ab;
+    }
+    public String getFoods(String foodsName, String flag){
+        String ab="";
+        for(int i=0;i<sFoods.size();i++){
+            String[] aa = sFoods.get(i).split("@");
+            if(foodsName.equals(aa[2])){
+                if(flag.equals("code")){
+                    ab = aa[1];
+                }else{
+                    ab = aa[0];
+                }
+            }
+        }
+        return ab;
+    }
+    public String getFoodsToName(String foods, String flag){
+        String ab="";
+        for(int i=0;i<sFoods.size();i++){
+            String[] aa = sFoods.get(i).split("@");
+            if(flag.equals("code")) {
+                if (foods.equals(aa[1])) {
+                    ab = aa[2];
+                    break;
+                }
+            }else if(flag.equals("idtocode")){
+                if (foods.equals(aa[0])) {
+                    ab = aa[1];
+                    break;
+                }
+            }else{
+                if(foods.equals(aa[0])){
+                    ab = aa[2];
+                    break;
+                }
+            }
+        }
+        return ab;
     }
     public String getArea(String areaName, String flag){
         String ab="";

@@ -5,8 +5,8 @@ package com.counterplus.ekapop.restaurant1;
  */
 
 public class FoodsSpecific extends Database {
-    public String ID="", Code="", Name="", FoodsId="", FoodsCode="", Price="", Sort1="", Active="";
-    public String dbID="foods_spec_id", dbCode="foods_spec_code", dbName="foods_spec_name", dbFoodsId="foods_id", dbFoodsCode="foods_code", dbPrice="price", dbSort1="sort1", dbActive="active";
+    public String ID="", Code="", Name="", FoodsId="", FoodsCode="", Price="", Sort1="", Active="", VoidDate="", VoidUser="";
+    public String dbID="foods_spec_id", dbCode="foods_spec_code", dbName="foods_spec_name", dbFoodsId="foods_id", dbFoodsCode="foods_code", dbPrice="price", dbSort1="sort1", dbActive="active", dbVoidDate="void_date", dbVoidUser="void_user";
 
     public String cFoodsSpecificMySQL=creaT+" '"+dbNameD+"'.'"+tbNameFoodsSpecific+"' "
             +"('"+dbID+"' "+varc+" NOT NULL "
@@ -41,6 +41,8 @@ public class FoodsSpecific extends Database {
             +", "+dbBranchId+" "+tex+"  NULL "
             +", "+dbDeviceId+" "+tex+"  NULL "
             +", "+dbSort1+" "+tex+"  NULL "
+            +", "+dbVoidDate+" "+tex+"  NULL "
+            +", "+dbVoidUser+" "+tex+"  NULL "
             +"); ";
     public String cDropFoodsSpecific="DROP TABLE IF EXISTS "+tbNameFoodsSpecific+" ;";
 }

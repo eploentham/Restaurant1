@@ -43,19 +43,19 @@ public class FoodsPrintViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foods_print_view);
 
         pageLoad = true;
-        lvFpView = findViewById(R.id.lvFcView);
+        lvFpView = findViewById(R.id.lvFpView);
         lvFpView.setBackgroundColor(getResources().getColor(R.color.BackScreenMailarap));
 
         rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
         daS = new DatabaseSQLi(this,"");
 
-        btnFpAdd = findViewById(R.id.btnFcAdd);
-        btnFpAdd.setText(R.string.btnIa1FoodsCatView);
+        btnFpAdd = findViewById(R.id.btnFpAdd);
+        btnFpAdd.setText(R.string.btnIa1PrinterView);
         btnFpAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rs.ftID ="";
-                Intent s1 = new Intent(view.getContext(), FoodsCatAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), FoodsPrintAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
@@ -66,13 +66,13 @@ public class FoodsPrintViewActivity extends AppCompatActivity {
                 try{
                     JSONObject catObj = (JSONObject) jarrFp.get(i);
                     //String ID = catObj.getString("foods_id");
-                    rs.ftID = catObj.getString("foods_type_id");
+                    rs.fpID = catObj.getString("foods_print_id");
                 }catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
-                Intent s1 = new Intent(view.getContext(), FoodsTypeAddActivity.class);
+                Intent s1 = new Intent(view.getContext(), FoodsPrintAddActivity.class);
                 s1.putExtra("RestaurantControl",rs);
                 startActivityForResult(s1, 0);
             }
@@ -85,7 +85,7 @@ public class FoodsPrintViewActivity extends AppCompatActivity {
         if(rs.AccessMode.equals("Standalone")) {
             if(!pageLoad) {
                 super.onResume();
-                jarrFp = daS.FoodsCatSelectAll();
+                jarrFp = daS.FoodsPrintSelectAll();
                 setLvFoodsPrint();
             }
         }else if(rs.AccessMode.equals("Internet")){
@@ -156,11 +156,11 @@ public class FoodsPrintViewActivity extends AppCompatActivity {
                     a.Name = catObj.getString(a.dbName);
                     a.Remark = catObj.getString(a.dbRemark);
                     a.Active = catObj.getString(a.dbActive);
-                    //a.AreaID = catObj.getString("area_id");
+                    a.IP = catObj.getString(a.dbIP);
                     a.Sort1 = catObj.getString(a.dbSort1);
                     lRes.add(a);
                     //arrayList.add(f.Code+" "+f.Name+" "+f.Price+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
-                    arrayList.add(a.Code+" "+a.Name+" "+a.Remark);
+                    arrayList.add(a.Code+" "+a.Name+" "+a.IP+" "+a.Remark);
                 }
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList){
                     @Override

@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -22,14 +24,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodsPrintAddActivity extends AppCompatActivity {
+public class FoodsSpecificAddActivity extends AppCompatActivity {
 
-    TextView lbFpaCode, lbFpaName, lbFpaRemark, lbFpaSort1, lbFpaActive, lbFpaIP;
-    EditText txtFpaCode, txtFpaName, txtFpaRemark, txtFpaSort1, txtFpaPasswordVoid, txtFpaIP;
-    Switch chkFpaActive;
-    Button btnFpaSave, btnFpaVoid;
+    TextView lbFsaCode, lbFsaName, lbFsaRemark, lbFsaSort1, lbFsaActive, lbFsaFoodsCode;
+    EditText txtFsaCode, txtFsaName, txtFsaRemark, txtFsaSort1, txtFsaPasswordVoid;
+    Switch chkFsaActive;
+    Button btnFsaSave, btnFsaVoid;
+    Spinner cboFsaFoodsCode;
 
-    FoodsPrint fp = new FoodsPrint();
+    FoodsSpecific fs = new FoodsSpecific();
 
     private RestaurantControl rs;
     JSONArray jarr;
@@ -42,116 +45,116 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foods_print_add);
+        setContentView(R.layout.activity_foods_specific_add);
 
         rs = (RestaurantControl) getIntent().getSerializableExtra("RestaurantControl");
         daS = new DatabaseSQLi(this,"");
-        fp = new FoodsPrint();
+        fs = new FoodsSpecific();
 
         textSize = rs.TextSize.equals("")?16:Integer.parseInt(rs.TextSize);
 
-        lbFpaCode = findViewById(R.id.lbFpaCode);
-        lbFpaName = findViewById(R.id.lbFpaName);
-        lbFpaRemark = findViewById(R.id.lbFpaRemark);
-        lbFpaActive = findViewById(R.id.lbFpaActive);
-        lbFpaSort1 = findViewById(R.id.lbFpaSort1);
-        lbFpaIP = findViewById(R.id.lbFpaIP);
-        txtFpaCode = findViewById(R.id.txtFpaCode);
-        txtFpaName = findViewById(R.id.txtFpaName);
-        txtFpaRemark = findViewById(R.id.txtFpaRemark);
-        txtFpaSort1 = findViewById(R.id.txtFpaSort1);
-        txtFpaPasswordVoid = findViewById(R.id.txtFpaPasswordVoid);
-        btnFpaSave = findViewById(R.id.btnFpaSave);
-        btnFpaVoid = findViewById(R.id.btnFpaVoid);
-        chkFpaActive = findViewById(R.id.chkFpaActive);
-        txtFpaIP = findViewById(R.id.txtFpaIP);
+        lbFsaFoodsCode = findViewById(R.id.lbFsaFoodsCode);
+        lbFsaCode = findViewById(R.id.lbFsaCode);
+        lbFsaName = findViewById(R.id.lbFsaName);
 
-        lbFpaCode.setText(R.string.code);
-        lbFpaName.setText(R.string.name);
-        lbFpaRemark.setText(R.string.remark);
-        lbFpaActive.setText(R.string.active);
-        lbFpaSort1.setText(R.string.sort);
-        lbFpaIP.setText(R.string.lbFpaIP);
-        btnFpaSave.setText(R.string.save);
-        btnFpaVoid.setText(R.string.void1);
-        btnFpaSave.setOnClickListener(new View.OnClickListener() {
+        lbFsaActive = findViewById(R.id.lbFsaActive);
+        lbFsaSort1 = findViewById(R.id.lbFsaSort1);
+        cboFsaFoodsCode = findViewById(R.id.cboFsaFoodsCode);
+        txtFsaCode = findViewById(R.id.txtFsaCode);
+        txtFsaName = findViewById(R.id.txtFsaName);
+
+        txtFsaSort1 = findViewById(R.id.txtFsaSort1);
+        txtFsaPasswordVoid = findViewById(R.id.txtFsaPasswordVoid);
+        btnFsaSave = findViewById(R.id.btnFsaSave);
+        btnFsaVoid = findViewById(R.id.btnFsaVoid);
+        chkFsaActive = findViewById(R.id.chkFsaActive);
+
+        lbFsaCode.setText(R.string.code);
+        lbFsaName.setText(R.string.name);
+
+        lbFsaFoodsCode.setText(R.string.desc);
+        lbFsaActive.setText(R.string.active);
+        lbFsaSort1.setText(R.string.sort);
+        btnFsaSave.setText(R.string.save);
+        btnFsaVoid.setText(R.string.void1);
+        btnFsaSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(rs.AccessMode.equals("Standalone")) {
-                    getFoodsPrint();
-                    jarr = daS.FoodsPrintInsert(fp.ID, fp.Code, fp.Name, fp.Remark, fp.Sort1, fp.IP);
-                    getFoodsPrintInsert();
+                    getFoodsSpecific();
+                    jarr = daS.FoodsSpecificInsert(fs.ID, fs.Code, fs.Name, fs.FoodsCode, fs.Sort1);
+                    getFoodsSpecificInsert();
                 }else if(rs.AccessMode.equals("Internet")){
-                    getFoodsPrint();
-                    new insertFoodsPrint().execute();
+                    getFoodsSpecific();
+                    new insertFoodsSpecific().execute();
                 }else{
-                    getFoodsPrint();
-                    new insertFoodsPrint().execute();
+                    getFoodsSpecific();
+                    new insertFoodsSpecific().execute();
                 }
 
             }
         });
-        btnFpaVoid.setVisibility(View.INVISIBLE);
-        txtFpaPasswordVoid.setVisibility(View.INVISIBLE);
-        chkFpaActive.setText(R.string.activeon);
-        chkFpaActive.setChecked(true);
-        txtFpaCode.setEnabled(false);
-        chkFpaActive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        btnFsaVoid.setVisibility(View.INVISIBLE);
+        txtFsaPasswordVoid.setVisibility(View.INVISIBLE);
+        chkFsaActive.setText(R.string.activeon);
+        chkFsaActive.setChecked(true);
+        txtFsaCode.setEnabled(false);
+        chkFsaActive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    chkFpaActive.setText(R.string.activeon);
-                    btnFpaVoid.setVisibility(View.INVISIBLE);
+                    chkFsaActive.setText(R.string.activeon);
+                    btnFsaVoid.setVisibility(View.INVISIBLE);
                 }else{
-                    chkFpaActive.setText(R.string.activeoff);
-                    btnFpaVoid.setVisibility(View.VISIBLE);
+                    chkFsaActive.setText(R.string.activeoff);
+                    btnFsaVoid.setVisibility(View.VISIBLE);
                 }
             }
         });
         if(rs.AccessMode.equals("Standalone")) {
-            jarrF = daS.FoodsPrintSelectById(rs.fpID);
+            jarrF = daS.FoodsCategorySelectById(rs.fcID);
             setControl();
         }else if(rs.AccessMode.equals("Internet")){
-            new retrieveFoodsPrint().execute();
+            new retrieveFoodsSpecific().execute();
         }else{
-            new retrieveFoodsPrint().execute();
+            new retrieveFoodsSpecific().execute();
         }
-        btnFpaVoid.setOnClickListener(new View.OnClickListener() {
+        btnFsaVoid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(btnFpaVoid.getText().toString().equals(getResources().getString(R.string.void1confrim))){
-                    if(txtFpaPasswordVoid.getText().toString().equals("")){
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsPrintAddActivity.this);
+                if(btnFsaVoid.getText().toString().equals(getResources().getString(R.string.void1confrim))){
+                    if(txtFsaPasswordVoid.getText().toString().equals("")){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsSpecificAddActivity.this);
                         builder1.setMessage("Password ไม่ได้ป้อน");
                         builder1.setCancelable(true);
                         builder1.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                txtFpaPasswordVoid.setSelection(0, txtFpaPasswordVoid.getText().length());
-                                txtFpaPasswordVoid.setFocusable(true);
+                                txtFsaPasswordVoid.setSelection(0, txtFsaPasswordVoid.getText().length());
+                                txtFsaPasswordVoid.setFocusable(true);
                             }
                         }).create().show();
                     }else{
-                        if(rs.chkPasswordVoid(txtFpaPasswordVoid.getText().toString())){
+                        if(rs.chkPasswordVoid(txtFsaPasswordVoid.getText().toString())){
 //                            String tableid = rs.getTable(cboBvTable.getSelectedItem().toString(),"genid");
                             if(rs.AccessMode.equals("Standalone")) {
-                                jarr = daS.FoodsCategoryVoid(rs.chkUserByPassword(txtFpaPasswordVoid.getText().toString()), fp.ID);
-                                getFoodsPrintVoid();
+                                jarr = daS.FoodsCategoryVoid(rs.chkUserByPassword(txtFsaPasswordVoid.getText().toString()), fs.ID);
+                                getFoodsSpecificVoid();
                             }else if(rs.AccessMode.equals("Internet")){
-                                new FoodsPrintVoid().execute(rs.chkUserByPassword(txtFpaPasswordVoid.getText().toString()), fp.ID);
+                                new FoodsSpecificVoid().execute(rs.chkUserByPassword(txtFsaPasswordVoid.getText().toString()), fs.ID);
                             }else{
-                                new FoodsPrintVoid().execute(rs.chkUserByPassword(txtFpaPasswordVoid.getText().toString()), fp.ID);
+                                new FoodsSpecificVoid().execute(rs.chkUserByPassword(txtFsaPasswordVoid.getText().toString()), fs.ID);
                             }
 
                         }else{
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsPrintAddActivity.this);
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsSpecificAddActivity.this);
                             builder1.setMessage("Password ไม่ถูกต้อง");
                             builder1.setCancelable(true);
                             builder1.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    txtFpaPasswordVoid.setSelection(0, txtFpaPasswordVoid.getText().length());
-                                    txtFpaPasswordVoid.setFocusable(true);
+                                    txtFsaPasswordVoid.setSelection(0, txtFsaPasswordVoid.getText().length());
+                                    txtFsaPasswordVoid.setFocusable(true);
                                 }
                             }).create().show();
                         }
@@ -166,9 +169,9 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
 
                     }
                 }else{
-                    if(!chkFpaActive.isChecked()){
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsPrintAddActivity.this);
-                        builder1.setMessage("ต้องการเยกเลิกรายการนี้.\n\nลำดับ "+" รหัส "+ txtFpaCode.getText().toString()+" "+ txtFpaName.getText().toString()+"\n");
+                    if(!chkFsaActive.isChecked()){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsSpecificAddActivity.this);
+                        builder1.setMessage("ต้องการเยกเลิกรายการนี้.\n\nลำดับ "+" รหัส "+ txtFsaCode.getText().toString()+" "+ txtFsaName.getText().toString()+"\n");
                         builder1.setCancelable(true);
                         builder1.setNegativeButton("No",new DialogInterface.OnClickListener() {
                             @Override
@@ -183,11 +186,10 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Whatever...
-                                txtFpaPasswordVoid.setVisibility(View.VISIBLE);
-                                btnFpaVoid.setText(R.string.void1confrim);
-                                txtFpaPasswordVoid.setSelection(0, txtFpaPasswordVoid.getText().length());
-                                txtFpaPasswordVoid.setFocusable(true);
-
+                                txtFsaPasswordVoid.setVisibility(View.VISIBLE);
+                                btnFsaVoid.setText(R.string.void1confrim);
+                                txtFsaPasswordVoid.setSelection(0, txtFsaPasswordVoid.getText().length());
+                                txtFsaPasswordVoid.setFocusable(true);
                             }
                         }).create().show();
                     }
@@ -195,62 +197,63 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
             }
         });
 //        new retrieveFoodsPrint().execute();
-        if(rs.ftID.equals("")) chkFpaActive.setChecked(true);
+        if(rs.fsID.equals("")) chkFsaActive.setChecked(true);
+        ArrayAdapter<String> adaFoods = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboFoods);
+        cboFsaFoodsCode.setAdapter(adaFoods);
         setTheme();
     }
     private void setTheme(){
-        lbFpaCode.setTextSize(textSize);
-        lbFpaName.setTextSize(textSize);
-        lbFpaRemark.setTextSize(textSize);
-        lbFpaSort1.setTextSize(textSize);
-        lbFpaActive.setTextSize(textSize);
-        txtFpaCode.setTextSize(textSize);
-        txtFpaName.setTextSize(textSize);
-        txtFpaRemark.setTextSize(textSize);
-        txtFpaSort1.setTextSize(textSize);
+        lbFsaCode.setTextSize(textSize);
+        lbFsaName.setTextSize(textSize);
+        //lbFsaRemark.setTextSize(textSize);
+        lbFsaSort1.setTextSize(textSize);
+        lbFsaActive.setTextSize(textSize);
+        txtFsaCode.setTextSize(textSize);
+        txtFsaName.setTextSize(textSize);
+//        txtFsaRemark.setTextSize(textSize);
+        txtFsaSort1.setTextSize(textSize);
     }
     private void setControl(){
         try {
-            fp = new FoodsPrint();
+            fs = new FoodsSpecific();
             if((jarrF!=null) && (!jarrF.equals("[]")) & jarrF.length()>0){
                 JSONObject catObj = (JSONObject) jarrF.get(0);
-                fp.ID = catObj.getString(fp.dbID);
-                fp.Code = catObj.getString(fp.dbCode);
-                fp.Name = rs.StringNull(catObj.getString(fp.dbName));
-                fp.Remark = rs.StringNull(catObj.getString(fp.dbRemark));
-                fp.Sort1 = catObj.getString(fp.dbSort1);
-                fp.Active = catObj.getString(fp.dbActive);
-                fp.IP = catObj.getString(fp.dbIP);
+                fs.ID = catObj.getString(fs.dbID);
+                fs.Code = catObj.getString(fs.dbCode);
+                fs.Name = rs.StringNull(catObj.getString(fs.dbName));
+                fs.Sort1 = catObj.getString(fs.dbSort1);
+                fs.Active = catObj.getString(fs.dbActive);
+                fs.FoodsCode = catObj.getString(fs.FoodsCode);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             Log.e("setControl ",e.getMessage());
         }
-        if(fp !=null){
-            txtFpaCode.setText(fp.Code);
-            txtFpaName.setText(fp.Name);
-            txtFpaRemark.setText(fp.Remark);
-            txtFpaSort1.setText(fp.Sort1);
-            txtFpaIP.setText(fp.IP);
-            if(fp.Active.equals("1")){
-                chkFpaActive.setChecked(true);
+        if(fs !=null){
+            txtFsaCode.setText(fs.Code);
+            txtFsaName.setText(fs.Name);
+            txtFsaSort1.setText(fs.Sort1);
+            if(fs.Active.equals("1")){
+                chkFsaActive.setChecked(true);
             }else{
-                chkFpaActive.setChecked(false);
+                chkFsaActive.setChecked(false);
             }
         }
     }
-    private void getFoodsPrint(){
-        fp = new FoodsPrint();
-        fp.ID = rs.fpID;
+    private void getFoodsSpecific(){
+        String foocode = rs.getFoods(cboFsaFoodsCode.getSelectedItem().toString(),"code");
+        String fooid = rs.getFoods(cboFsaFoodsCode.getSelectedItem().toString(),"genid");
+
+        fs = new FoodsSpecific();
+        fs.ID = rs.fsID;
         //res.Sort1=txtRaSort1.getText().toString();
-        fp.Active="1";
-        fp.Code= txtFpaCode.getText().toString();
-        fp.Name= txtFpaName.getText().toString();
-        fp.Remark= txtFpaRemark.getText().toString();
-        fp.IP= txtFpaIP.getText().toString();
+        fs.Active="1";
+        fs.Code = txtFsaCode.getText().toString();
+        fs.Name = txtFsaName.getText().toString();
+        fs.FoodsCode = foocode;
     }
-    class insertFoodsPrint extends AsyncTask<String,String,String> {
+    class insertFoodsSpecific extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
@@ -258,14 +261,13 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
-            params.add(new BasicNameValuePair(fp.dbID, fp.ID));
-            params.add(new BasicNameValuePair(fp.dbCode, fp.Code));
-            params.add(new BasicNameValuePair(fp.dbName, fp.Name));
-            params.add(new BasicNameValuePair(fp.dbRemark, fp.Remark));
-            params.add(new BasicNameValuePair(fp.dbActive, fp.Active));
-            params.add(new BasicNameValuePair(fp.dbSort1, fp.Sort1));
-            params.add(new BasicNameValuePair(fp.dbIP, fp.IP));
-            if(fp.ID.equals("")){
+            params.add(new BasicNameValuePair(fs.dbID, fs.ID));
+            params.add(new BasicNameValuePair(fs.dbCode, fs.Code));
+            params.add(new BasicNameValuePair(fs.dbName, fs.Name));
+
+            params.add(new BasicNameValuePair(fs.dbActive, fs.Active));
+            params.add(new BasicNameValuePair(fs.dbSort1, fs.Sort1));
+            if(fs.ID.equals("")){
                 jarr = jsonparser.getJSONFromUrl(rs.hostFoodsTypeInsert,params);
             }else{
                 jarr = jsonparser.getJSONFromUrl(rs.hostFoodsTypeUpdate,params);
@@ -282,57 +284,57 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String aaa = ab;
-            getFoodsPrintInsert();
+            getFoodsSpecificInsert();
         }
         @Override
         protected void onPreExecute() {
             String aaa = ab;
         }
     }
-    private void getFoodsPrintInsert(){
+    private void getFoodsSpecificInsert(){
         try {
             JSONObject catObj = (JSONObject) jarr.get(0);
             Log.d("sql",catObj.getString("sql"));
             if(catObj.getString("success").equals("1")){
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsPrintAddActivity.this);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsSpecificAddActivity.this);
                 builder1.setMessage("บันทึกข้อมูล  เรียบร้อย");
                 builder1.setCancelable(true);
                 builder1.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        btnFpaSave.setEnabled(false);
+                        btnFsaSave.setEnabled(false);
                     }
                 }).create().show();
             }
         } catch (JSONException e) {
-            Log.e("getFoodsPrintInsert ",e.getMessage());
+            Log.e("getFoodsSpecificInsert ",e.getMessage());
         }
     }
-    private void getFoodsPrintVoid(){
+    private void getFoodsSpecificVoid(){
         try {
             JSONObject catObj = (JSONObject) jarr.get(0);
             Log.d("sql",catObj.getString("sql"));
             if(catObj.getString("status").equals("1")){
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsPrintAddActivity.this);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(FoodsSpecificAddActivity.this);
                 builder1.setMessage("ยกเลิกข้อมูล  เรียบร้อย");
                 builder1.setCancelable(true);
                 builder1.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        btnFpaSave.setEnabled(false);
+                        btnFsaSave.setEnabled(false);
                     }
                 }).create().show();
             }
         } catch (JSONException e) {
-            Log.e("getFoodsPrintInsert ",e.getMessage());
+            Log.e("getFoodsSpecificInsert ",e.getMessage());
         }
     }
-    class retrieveFoodsPrint extends AsyncTask<String,String,String> {
+    class retrieveFoodsSpecific extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(fp.dbID, rs.ftID));
+            params.add(new BasicNameValuePair(fs.dbID, rs.ftID));
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
 
@@ -349,13 +351,13 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
             String aaa = ab;
         }
     }
-    class FoodsPrintVoid extends AsyncTask<String,String,String> {
+    class FoodsSpecificVoid extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... arg0) {
             //Log.d("Login attempt", jobj.toString());
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(fp.dbID, arg0[1]));
-            params.add(new BasicNameValuePair(fp.dbVoidUser, arg0[0]));
+            params.add(new BasicNameValuePair(fs.dbID, arg0[1]));
+            params.add(new BasicNameValuePair(fs.dbVoidUser, arg0[0]));
             params.add(new BasicNameValuePair("userdb",rs.UserDB));
             params.add(new BasicNameValuePair("passworddb",rs.PasswordDB));
 
@@ -365,7 +367,7 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String ab){
             String aaa = ab;
-            getFoodsPrintVoid();
+            getFoodsSpecificVoid();
         }
         @Override
         protected void onPreExecute() {
