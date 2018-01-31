@@ -42,6 +42,8 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
     FoodsSpecific fs = new FoodsSpecific();
     FoodsCategory fc = new FoodsCategory();
     FoodsPrint fp = new FoodsPrint();
+    Brand brand = new Brand();
+    Model model = new Model();
 
     Context c;
     SQLiteDatabase mDb;
@@ -64,6 +66,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         String arID = UUID.randomUUID().toString();
         String catID1 = UUID.randomUUID().toString();
         String catID2 = UUID.randomUUID().toString();
+        String brandID1 = UUID.randomUUID().toString();
+        String brandID2 = UUID.randomUUID().toString();
+        String modelID1 = UUID.randomUUID().toString();
 
         cAr=da.creaT+" "+da.tbNameRes+" "
                 +"( "+ar.dbID+"' "+da.tex+" PRIMARY KEY "
@@ -74,6 +79,16 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                 +", '"+ar.dbSort1+"' "+da.tex+"  NULL "
                 +") ";
         try{
+            Log.d("onCreate ",brand.cBrandSQLi);
+            db.execSQL(brand.cDropBrand);
+            db.execSQL(brand.cBrandSQLi);
+            db.execSQL("Insert Into "+da.tbNameBrand+" ("+brand.dbID+","+brand.dbCode+", "+brand.dbName+", "+brand.dbActive+", "+brand.dbDateCreate+","+brand.dbHostId+") Values('"+brandID1+"','01', 'EPSON','1',"+ gendate +",'"+hostID+"');");
+            db.execSQL("Insert Into "+da.tbNameBrand+" ("+brand.dbID+","+brand.dbCode+", "+brand.dbName+", "+brand.dbActive+", "+brand.dbDateCreate+","+brand.dbHostId+") Values('"+brandID2+"','02', 'CUSTOM','1',"+ gendate +",'"+hostID+"');");
+
+            db.execSQL(model.cDropModel);
+            db.execSQL(model.cModelSQLi);
+            db.execSQL("Insert Into "+da.tbNameModel+" ("+model.dbID+","+model.dbCode+", "+model.dbName+", "+model.dbActive+", "+model.dbDateCreate+","+model.dbHostId+","+model.dbBrandId+") Values('"+modelID1+"','01', 'T82','1',"+ gendate +",'"+hostID +"','"+brandID1+"');");
+
             Log.d("onCreate ",ar.cAreaSQLi);
             db.execSQL(ar.cDropArea);
             db.execSQL(ar.cAreaSQLi);
@@ -105,16 +120,20 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             db.execSQL(foo.cFoodsSQLi);
             db.execSQL("Insert Into "+da.tbNameFoods+" ("+foo.dbID+", "+foo.dbCode+", "+foo.dbName+", "+foo.dbPrice+", "
                     +foo.dbActive+", "+foo.dbTypeId+", "+foo.dbResId+", "+foo.dbResCode+", "
-                    +foo.dbStatusFoods+", "+ar.dbDateCreate+","+ar.dbHostId+") Values(lower(hex(randomblob(16))),'0101', 'อาหาร1',45,'1','"+typeID1+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"');");
+                    +foo.dbStatusFoods+", "+foo.dbDateCreate+","+foo.dbHostId+","+foo.dbCatId
+                    +") Values(lower(hex(randomblob(16))),'0101', 'อาหาร1',45,'1','"+typeID1+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"','"+catID1+"');");
             db.execSQL("Insert Into "+da.tbNameFoods+" ("+foo.dbID+", "+foo.dbCode+", "+foo.dbName+", "+foo.dbPrice+", "
                     +foo.dbActive+", "+foo.dbTypeId+", "+foo.dbResId+", "+foo.dbResCode+", "
-                    +foo.dbStatusFoods+", "+ar.dbDateCreate+","+ar.dbHostId+") Values(lower(hex(randomblob(16))),'0102', 'อาหาร2',45,'1','"+typeID1+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"');");
+                    +foo.dbStatusFoods+", "+foo.dbDateCreate+","+foo.dbHostId+","+foo.dbCatId
+                    +") Values(lower(hex(randomblob(16))),'0102', 'อาหาร2',45,'1','"+typeID1+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"','"+catID1+"');");
             db.execSQL("Insert Into "+da.tbNameFoods+" ("+foo.dbID+", "+foo.dbCode+", "+foo.dbName+", "+foo.dbPrice+", "
                     +foo.dbActive+", "+foo.dbTypeId+", "+foo.dbResId+", "+foo.dbResCode+", "
-                    +foo.dbStatusFoods+", "+ar.dbDateCreate+","+ar.dbHostId+") Values(lower(hex(randomblob(16))),'0201', 'อาหาร3',50,'1','"+typeID2+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"');");
+                    +foo.dbStatusFoods+", "+foo.dbDateCreate+","+foo.dbHostId+","+foo.dbCatId
+                    +") Values(lower(hex(randomblob(16))),'0201', 'อาหาร3',50,'1','"+typeID2+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"','"+catID2+"');");
             db.execSQL("Insert Into "+da.tbNameFoods+" ("+foo.dbID+", "+foo.dbCode+", "+foo.dbName+", "+foo.dbPrice+", "
                     +foo.dbActive+", "+foo.dbTypeId+", "+foo.dbResId+", "+foo.dbResCode+", "
-                    +foo.dbStatusFoods+", "+ar.dbDateCreate+","+ar.dbHostId+") Values(lower(hex(randomblob(16))),'0202', 'อาหาร4',50,'1','"+typeID2+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"');");
+                    +foo.dbStatusFoods+", "+foo.dbDateCreate+","+foo.dbHostId+","+foo.dbCatId
+                    +") Values(lower(hex(randomblob(16))),'0202', 'อาหาร4',50,'1','"+typeID2+"','"+resID+"','10','1',"+ gendate +",'"+hostID+"','"+catID2+"');");
 
             Log.d("onCreate ",ft.cFoodsTypeSQLi);
             db.execSQL(ft.cDropFoodsType);
@@ -569,6 +588,48 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //        jarr = new JSONArray(json);
         return  jarr;
     }
+    public JSONArray BrandSelectAll(){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameBrand+" Where "+brand.dbActive+" = '1' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectBrand(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
+    public JSONArray ModelSelectAll(){
+        JSONArray jarr = new JSONArray();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("Select * From "+da.tbNameModel+" Where "+model.dbActive+" = '1' ", null);
+        if(c.moveToFirst()){
+            do{
+//                JSONObject jsonObj = getJsonObjectFoodsType(c);
+                //assing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+                //Do something Here with values
+                jarr.put(getJsonObjectFoodsPrint(c));
+
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+//        jarr = new JSONArray(json);
+        return  jarr;
+    }
     private JSONObject getJsonObjectFoodsSpecific(Cursor c) {
         JSONObject jsonObj = new JSONObject();
         try {
@@ -586,9 +647,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //            jsonObj.put(fs.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+            Log.e("getJsonObjectFoodsSpecific ",e.getMessage());
         }catch (Exception e){
-            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+            Log.e("getJsonObjectFoodsSpecific ",e.getMessage());
         }
         return jsonObj;
     }
@@ -609,9 +670,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jsonObj.put(fp.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+            Log.e("getJsonObjectFoodsPrint ",e.getMessage());
         }catch (Exception e){
-            Log.e("getJsonObjectFoodsCat ",e.getMessage());
+            Log.e("getJsonObjectFoodsPrint ",e.getMessage());
         }
         return jsonObj;
     }
@@ -659,6 +720,52 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             Log.e("getJsonObjectFoodsType ",e.getMessage());
         }catch (Exception e){
             Log.e("getJsonObjectFoodsType ",e.getMessage());
+        }
+        return jsonObj;
+    }
+    private JSONObject getJsonObjectBrand(Cursor c) {
+        JSONObject jsonObj = new JSONObject();
+        try {
+            jsonObj.put(brand.dbID, c.getString(c.getColumnIndex(brand.dbID)));
+            jsonObj.put(brand.dbCode, chkNull(c.getString(c.getColumnIndex(brand.dbCode)))?"":c.getString(c.getColumnIndex(brand.dbCode)));
+            jsonObj.put(brand.dbName, chkNull(c.getString(c.getColumnIndex(brand.dbName)))?"":c.getString(c.getColumnIndex(brand.dbName)));
+            jsonObj.put(brand.dbActive, chkNull(c.getString(c.getColumnIndex(brand.dbActive)))?"":c.getString(c.getColumnIndex(brand.dbActive)));
+            jsonObj.put(brand.dbRemark, chkNull(c.getString(c.getColumnIndex(brand.dbRemark)))?"":c.getString(c.getColumnIndex(brand.dbRemark)));
+            jsonObj.put(brand.dbSort1, chkNull(c.getString(c.getColumnIndex(brand.dbSort1)))?"":c.getString(c.getColumnIndex(brand.dbSort1)));
+            jsonObj.put(brand.dbDateCreate, chkNull(c.getString(c.getColumnIndex(brand.dbDateCreate)))?"":c.getString(c.getColumnIndex(brand.dbDateCreate)));
+            jsonObj.put(brand.dbDateModi, chkNull(c.getString(c.getColumnIndex(brand.dbDateModi)))?"":c.getString(c.getColumnIndex(brand.dbDateModi)));
+            jsonObj.put(brand.dbHostId, chkNull(c.getString(c.getColumnIndex(brand.dbHostId)))?"":c.getString(c.getColumnIndex(brand.dbHostId)));
+            jsonObj.put(brand.dbBranchId, chkNull(c.getString(c.getColumnIndex(brand.dbBranchId)))?"":c.getString(c.getColumnIndex(brand.dbBranchId)));
+            jsonObj.put(brand.dbDeviceId, chkNull(c.getString(c.getColumnIndex(brand.dbDeviceId)))?"":c.getString(c.getColumnIndex(brand.dbDeviceId)));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("getJsonObjectBrand ",e.getMessage());
+        }catch (Exception e){
+            Log.e("getJsonObjectBrand ",e.getMessage());
+        }
+        return jsonObj;
+    }
+    private JSONObject getJsonObjectModel(Cursor c) {
+        JSONObject jsonObj = new JSONObject();
+        try {
+            jsonObj.put(model.dbID, c.getString(c.getColumnIndex(model.dbID)));
+            jsonObj.put(model.dbCode, chkNull(c.getString(c.getColumnIndex(model.dbCode)))?"":c.getString(c.getColumnIndex(model.dbCode)));
+            jsonObj.put(model.dbName, chkNull(c.getString(c.getColumnIndex(model.dbName)))?"":c.getString(c.getColumnIndex(model.dbName)));
+            jsonObj.put(model.dbActive, chkNull(c.getString(c.getColumnIndex(model.dbActive)))?"":c.getString(c.getColumnIndex(model.dbActive)));
+            jsonObj.put(model.dbRemark, chkNull(c.getString(c.getColumnIndex(model.dbRemark)))?"":c.getString(c.getColumnIndex(model.dbRemark)));
+            jsonObj.put(model.dbSort1, chkNull(c.getString(c.getColumnIndex(model.dbSort1)))?"":c.getString(c.getColumnIndex(model.dbSort1)));
+            jsonObj.put(model.dbDateCreate, chkNull(c.getString(c.getColumnIndex(model.dbDateCreate)))?"":c.getString(c.getColumnIndex(model.dbDateCreate)));
+            jsonObj.put(model.dbDateModi, chkNull(c.getString(c.getColumnIndex(model.dbDateModi)))?"":c.getString(c.getColumnIndex(model.dbDateModi)));
+            jsonObj.put(model.dbHostId, chkNull(c.getString(c.getColumnIndex(model.dbHostId)))?"":c.getString(c.getColumnIndex(model.dbHostId)));
+            jsonObj.put(model.dbBranchId, chkNull(c.getString(c.getColumnIndex(model.dbBranchId)))?"":c.getString(c.getColumnIndex(model.dbBranchId)));
+            jsonObj.put(model.dbDeviceId, chkNull(c.getString(c.getColumnIndex(model.dbDeviceId)))?"":c.getString(c.getColumnIndex(model.dbDeviceId)));
+            jsonObj.put(model.dbBrandId, chkNull(c.getString(c.getColumnIndex(model.dbBrandId)))?"":c.getString(c.getColumnIndex(model.dbBrandId)));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("getJsonObjectBrand ",e.getMessage());
+        }catch (Exception e){
+            Log.e("getJsonObjectBrand ",e.getMessage());
         }
         return jsonObj;
     }
@@ -748,7 +855,6 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         return  jarr;
     }
 
-
     private JSONObject getJsonObjectFoods(Cursor c) {
         JSONObject jsonObj = new JSONObject();
         try {
@@ -769,6 +875,8 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jsonObj.put(foo.dbHostId, chkNull(c.getString(c.getColumnIndex(foo.dbHostId)))?"":c.getString(c.getColumnIndex(foo.dbHostId)));
             jsonObj.put(foo.dbBranchId, chkNull(c.getString(c.getColumnIndex(foo.dbBranchId)))?"":c.getString(c.getColumnIndex(foo.dbBranchId)));
             jsonObj.put(foo.dbDeviceId, chkNull(c.getString(c.getColumnIndex(foo.dbDeviceId)))?"":c.getString(c.getColumnIndex(foo.dbDeviceId)));
+            jsonObj.put(foo.dbCatId, chkNull(c.getString(c.getColumnIndex(foo.dbCatId)))?"":c.getString(c.getColumnIndex(foo.dbCatId)));
+            jsonObj.put(foo.dbPrintId, chkNull(c.getString(c.getColumnIndex(foo.dbPrintId)))?"":c.getString(c.getColumnIndex(foo.dbPrintId)));
 
         } catch (JSONException e) {
             e.printStackTrace();

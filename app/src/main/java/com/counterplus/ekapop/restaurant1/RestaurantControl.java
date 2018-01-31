@@ -44,6 +44,8 @@ public class RestaurantControl  extends Application implements Serializable {
     public ArrayList<String> sCboLanguage = new ArrayList<String>();
     public ArrayList<String> sCboMonth = new ArrayList<String>();
     public ArrayList<String> sCboYear = new ArrayList<String>();
+    public ArrayList<String> sCboBrand = new ArrayList<String>();
+    public ArrayList<String> sCboModel = new ArrayList<String>();
 
     public ArrayList<String> sTable = new ArrayList<String>();
     public ArrayList<String> sArea = new ArrayList<String>();
@@ -55,6 +57,8 @@ public class RestaurantControl  extends Application implements Serializable {
     public ArrayList<String> sFoodsType = new ArrayList<String>();
     public ArrayList<String> sFoodsCategory = new ArrayList<String>();
     public ArrayList<String> sUser = new ArrayList<String>();
+    public ArrayList<String> sBrand = new ArrayList<String>();
+    public ArrayList<String> sModel = new ArrayList<String>();
 
     public String ResName="", ReceiptH1="", ReceiptH2="", ReceiptF1="", ReceiptF2="", imei="";
 
@@ -404,6 +408,22 @@ public class RestaurantControl  extends Application implements Serializable {
                     ab = aa[1];
                 }else{
                     ab = aa[0];
+                }
+            }
+        }
+        return ab;
+    }
+    public String getFoodsCategoryToName(String foodsCat, String flag){
+        String ab="";
+        for(int i=0;i<sFoodsCategory.size();i++){
+            String[] aa = sFoodsCategory.get(i).split("@");
+            if(flag.equals("code")){
+                if(foodsCat.equals(aa[1])){
+                    ab = aa[2];
+                }
+            }else{
+                if(foodsCat.equals(aa[0])){
+                    ab = aa[2];
                 }
             }
         }

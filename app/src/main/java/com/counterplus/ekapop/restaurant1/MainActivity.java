@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     JsonParser jsonparser = new JsonParser();
     String ab;
     JSONObject jobj = null;
-    JSONArray jarrA, jarrT, jarrR, jarrF,jarrU, jarrP, jarrFt, jarrFc, jarrFs, jarrFp;
+    JSONArray jarrA, jarrT, jarrR, jarrF,jarrU, jarrP, jarrFt, jarrFc, jarrFs, jarrFp, jarrBrand, jarrModel;
     //Button btnMInt;
     ImageButton btnMBill, btnMOrderV,btnCookV,btnOrderA, btnMCloseDay, btnMInt,btnMReport;
     ImageView imageRes, imageArea,imageTable,imageFoods,imageFoodsType, imageUser;
@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     FoodsSpecific fs = new FoodsSpecific();
     Area ar = new Area();
     Foods foo = new Foods();
+    Brand brand = new Brand();
+    Model model = new Model();
+
     Restaurant res = new Restaurant();
 
     @Override
@@ -219,6 +222,10 @@ public class MainActivity extends AppCompatActivity {
             setFoodsSpecific();
             jarrFp = daS.FoodsPrintSelectAll();
             setFoodsPrint();
+            jarrBrand = daS.BrandSelectAll();
+            setBrand();
+            jarrModel = daS.ModelSelectAll();
+            setModel();
 
         }else if(rs.AccessMode.equals("Internet")){
 //            rs.hostIP = "";
@@ -572,6 +579,46 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject catObj = (JSONObject) jarrFp.get(i);
                     rs.sCboFoodsPrint.add(catObj.getString(fp.dbName));
                     rs.sFoodsPrint.add(catObj.getString(fp.dbID)+"@"+catObj.getString(fp.dbCode)+"@"+catObj.getString(fp.dbName));
+                }
+//                imageFoodsType.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+    }
+    private void setBrand(){
+        try {
+            if(jarrBrand!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboBrand.clear();
+                rs.sBrand.clear();
+                for (int i = 0; i < jarrBrand.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrBrand.get(i);
+                    rs.sCboBrand.add(catObj.getString(brand.dbName));
+                    rs.sBrand.add(catObj.getString(brand.dbID)+"@"+catObj.getString(brand.dbCode)+"@"+catObj.getString(brand.dbName));
+                }
+//                imageFoodsType.setImageResource(R.drawable.green1);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.e("setFoodsType ",e.getMessage());
+        }
+    }
+    private void setModel(){
+        try {
+            if(jarrModel!=null){
+                //JSONArray categories = jobj.getJSONArray("area");
+                //JSONArray json = new JSONArray(jobj);
+                rs.sCboModel.clear();
+                rs.sModel.clear();
+                for (int i = 0; i < jarrModel.length(); i++) {
+                    JSONObject catObj = (JSONObject) jarrModel.get(i);
+                    rs.sCboModel.add(catObj.getString(brand.dbName));
+                    rs.sModel.add(catObj.getString(model.dbID)+"@"+catObj.getString(model.dbCode)+"@"+catObj.getString(model.dbName));
                 }
 //                imageFoodsType.setImageResource(R.drawable.green1);
             }

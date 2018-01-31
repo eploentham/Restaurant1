@@ -112,7 +112,7 @@ public class FoodsAddActivity extends AppCompatActivity {
                 getFoods();
                 if(rs.AccessMode.equals("Standalone")) {
                     getFoods();
-                    jarrF = daS.FoodsInsert(foo.ID, foo.Code, foo.Name,foo.Price,foo.TypeId, foo.Remark,foo.ResId,foo.ResCode,foo.StatusFoods,foo.PrinterName,foo.Sort1,"","");
+                    jarrF = daS.FoodsInsert(foo.ID, foo.Code, foo.Name,foo.Price,foo.TypeId, foo.Remark,foo.ResId,foo.ResCode,foo.StatusFoods,foo.PrinterName,foo.Sort1,"","", foo.CatId);
                     getFoodsInsert();
                 }else if(rs.AccessMode.equals("Internet")){
                     new insertFoods().execute();
@@ -243,6 +243,7 @@ public class FoodsAddActivity extends AppCompatActivity {
                 foo.ResId = catObj.getString(foo.dbResId);
                 foo.StatusFoods = catObj.getString(foo.dbStatusFoods);
                 foo.TypeId = catObj.getString(foo.dbTypeId);
+                foo.CatId = catObj.getString(foo.dbCatId);
                 //rs.sCboArea.add(catObj.getString("name"));
             }
         } catch (JSONException e) {
@@ -258,6 +259,11 @@ public class FoodsAddActivity extends AppCompatActivity {
             for(int i=0;i<cboFaFoodsType.getCount();i++){
                 if(cboFaFoodsType.getItemAtPosition(i).equals(rs.getFoodsTypeToName(foo.TypeId,"genid"))){
                     cboFaFoodsType.setSelection(i);
+                }
+            }
+            for(int i=0;i<cboFaFoodsCat.getCount();i++){
+                if(cboFaFoodsCat.getItemAtPosition(i).equals(rs.getFoodsCategoryToName(foo.CatId,"genid"))){
+                    cboFaFoodsCat.setSelection(i);
                 }
             }
             for(int i = 0; i< cboFaRes.getCount(); i++){
