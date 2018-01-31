@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
     EditText txtFpaCode, txtFpaName, txtFpaRemark, txtFpaSort1, txtFpaPasswordVoid, txtFpaIP;
     Switch chkFpaActive;
     Button btnFpaSave, btnFpaVoid;
+    Spinner cboFpaBrand,cboFpaModel;
 
     FoodsPrint fp = new FoodsPrint();
 
@@ -67,6 +70,8 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         txtFpaIP = findViewById(R.id.txtFpaIP);
         lbFpaBrand = findViewById(R.id.lbFpaBrand);
         lbFpaModel = findViewById(R.id.lbFpaModel);
+        cboFpaBrand = findViewById(R.id.cboFpaBrand);
+        cboFpaModel = findViewById(R.id.cboFpaModel);
 
         lbFpaCode.setText(R.string.code);
         lbFpaName.setText(R.string.name);
@@ -120,6 +125,10 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         }else{
             new retrieveFoodsPrint().execute();
         }
+        ArrayAdapter<String> adaBrand = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboBrand);
+        ArrayAdapter<String> adaModel = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboModel);
+        cboFpaBrand.setAdapter(adaBrand);
+        cboFpaModel.setAdapter(adaModel);
         btnFpaVoid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

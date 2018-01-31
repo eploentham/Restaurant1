@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lbFpaBrand" />
 
     <Spinner
-        android:id="@+id/txtFpaModel"
+        android:id="@+id/cboFpaModel"
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -142,7 +142,7 @@
         android:layout_marginTop="32dp"
         android:text="Switch"
         app:layout_constraintStart_toEndOf="@+id/lbFpaActive"
-        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
+        app:layout_constraintTop_toBottomOf="@+id/cboFpaModel" />
 
     <EditText
         android:id="@+id/txtFpaPasswordVoid"
@@ -154,7 +154,7 @@
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/chkFpaActive"
-        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
+        app:layout_constraintTop_toBottomOf="@+id/cboFpaModel" />
 
     <Button
         android:id="@+id/btnFpaVoid"
@@ -166,7 +166,7 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtFpaPasswordVoid"
-        app:layout_constraintTop_toBottomOf="@+id/txtFpaModel" />
+        app:layout_constraintTop_toBottomOf="@+id/cboFpaModel" />
 
     <TextView
         android:id="@+id/lbFpaSort1"

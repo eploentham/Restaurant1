@@ -23,10 +23,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbFaResCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/lbFaResCode"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/lbFaResCode" />
 
     <TextView
         android:id="@+id/lbFaFoodsCode"
@@ -146,12 +147,13 @@
     <TextView
         android:id="@+id/lbFaPrinter"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="21dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/cboFaPrinter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbFaFoodsCat" />
+        app:layout_constraintTop_toTopOf="@+id/cboFaPrinter" />
 
     <Spinner
         android:id="@+id/cboFaPrinter"
@@ -227,7 +229,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbFaFoodsType" />

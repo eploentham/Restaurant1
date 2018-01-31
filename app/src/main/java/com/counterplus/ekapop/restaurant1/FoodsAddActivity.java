@@ -96,7 +96,7 @@ public class FoodsAddActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adaArea = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboRes);
         cboFaRes.setAdapter(adaArea);
-        ArrayAdapter<String> adaPrinter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboPrinter);
+        ArrayAdapter<String> adaPrinter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboFoodsPrint);
         cboFaPrinter.setAdapter(adaPrinter);
         ArrayAdapter<String> adaFoodsType = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,rs.sCboFoodsType);
         cboFaFoodsType.setAdapter(adaFoodsType);

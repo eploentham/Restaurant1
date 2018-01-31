@@ -617,7 +617,7 @@ public class MainActivity extends AppCompatActivity {
                 rs.sModel.clear();
                 for (int i = 0; i < jarrModel.length(); i++) {
                     JSONObject catObj = (JSONObject) jarrModel.get(i);
-                    rs.sCboModel.add(catObj.getString(brand.dbName));
+                    rs.sCboModel.add(catObj.getString(model.dbName));
                     rs.sModel.add(catObj.getString(model.dbID)+"@"+catObj.getString(model.dbCode)+"@"+catObj.getString(model.dbName));
                 }
 //                imageFoodsType.setImageResource(R.drawable.green1);

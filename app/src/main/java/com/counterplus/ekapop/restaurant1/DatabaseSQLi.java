@@ -621,7 +621,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //                String column2 = c.getString(1);
 //                String column3 = c.getString(2);
                 //Do something Here with values
-                jarr.put(getJsonObjectFoodsPrint(c));
+                jarr.put(getJsonObjectModel(c));
 
             }while(c.moveToNext());
         }
@@ -647,9 +647,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
 //            jsonObj.put(fs.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("getJsonObjectFoodsSpecific ",e.getMessage());
+            Log.e("getJsonObjectFoodsSpec ",e.getMessage());
         }catch (Exception e){
-            Log.e("getJsonObjectFoodsSpecific ",e.getMessage());
+            Log.e("getJsonObjectFoodsSpec ",e.getMessage());
         }
         return jsonObj;
     }
@@ -670,9 +670,9 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jsonObj.put(fp.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("getJsonObjectFoodsPrint ",e.getMessage());
+            Log.e("getJsonObjectFoodsP ",e.getMessage());
         }catch (Exception e){
-            Log.e("getJsonObjectFoodsPrint ",e.getMessage());
+            Log.e("getJsonObjectFoodsP ",e.getMessage());
         }
         return jsonObj;
     }
