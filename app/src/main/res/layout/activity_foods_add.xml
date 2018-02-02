@@ -48,8 +48,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="txtFaFoodsCode"
+        app:layout_constraintBottom_toBottomOf="@+id/lbFaFoodsCode"
         app:layout_constraintStart_toEndOf="@+id/lbFaFoodsCode"
-        app:layout_constraintTop_toBottomOf="@+id/cboFaFoodsRes" />
+        app:layout_constraintTop_toTopOf="@+id/lbFaFoodsCode" />
 
     <TextView
         android:id="@+id/lbFaFoodsName"
@@ -81,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbFaFoodsName" />
@@ -103,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbFaFoodsPrice" />
