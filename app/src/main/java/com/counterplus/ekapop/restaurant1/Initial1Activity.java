@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 public class Initial1Activity extends AppCompatActivity {
     Button btnIa1FoodsTypeView,btnIa1FoodsView, btnIa1BillVoid, btnIa1TableChange, btnIa1TableMerge,btnIa1User;
-    Button btnIa1TableView,btnIa1AreaView, btnIa1ResView, btnIa1FoodsCatView, btnIa1FoodsSpecView, btnIa1PrinterView;
+    Button btnIa1TableView,btnIa1AreaView, btnIa1ResView, btnIa1FoodsCatView, btnIa1FoodsSpecView, btnIa1PrinterView, btnTestPrn;
 
     public RestaurantControl rs;
 
@@ -32,6 +32,7 @@ public class Initial1Activity extends AppCompatActivity {
         btnIa1FoodsCatView = findViewById(R.id.btnIa1FoodsCatView);
         btnIa1FoodsSpecView = findViewById(R.id.btnIa1FoodsSpecView);
         btnIa1PrinterView = findViewById(R.id.btnIa1PrinterView);
+        btnTestPrn = findViewById(R.id.btnTestPrn);
 
         btnIa1FoodsTypeView.setText(getResources().getString(R.string.add)+getResources().getString(R.string.type)+getResources().getString(R.string.foods));
         btnIa1FoodsView.setText(R.string.foodsadd);
@@ -110,6 +111,12 @@ public class Initial1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(view.getContext(), FoodsSpecificViewActivity.class).putExtra("RestaurantControl",rs), 0);
+            }
+        });
+        btnTestPrn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), PrintTestEscActivity.class).putExtra("RestaurantControl",rs), 0);
             }
         });
     }

@@ -1,6 +1,9 @@
 package com.counterplus.ekapop.restaurant1;
 
 import android.app.Application;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -140,6 +143,10 @@ public class RestaurantControl  extends Application implements Serializable {
     public ArrayList<Foods> lFoo = new ArrayList<Foods>();
     public String jarrA, jarrT, jarrR, jarrF, flagReport;
     public Boolean pageLoad=false;
+
+    public BluetoothAdapter mBluetoothAdapter;
+    public BluetoothSocket mmSocket;
+    public BluetoothDevice mmDevice;
     //JSONArray jarrF1;
     //public List<Ta> lFoo = new ArrayList<Foods>();
     public RestaurantControl(){
@@ -801,4 +808,5 @@ public class RestaurantControl  extends Application implements Serializable {
             Log.e("getText() ",e.getMessage());
         }
     }
+
 }

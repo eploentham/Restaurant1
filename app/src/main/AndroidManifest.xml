@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -53,7 +57,8 @@
         <activity android:name=".FoodsCatAddActivity" />
         <activity android:name=".FoodsPrintAddActivity" />
         <activity android:name=".FoodsSpecificAddActivity" />
-        <activity android:name=".FoodsSpecificViewActivity"></activity>
+        <activity android:name=".FoodsSpecificViewActivity" />
+        <activity android:name=".PrintTestEscActivity"></activity>
     </application>
 
 </manifest>
