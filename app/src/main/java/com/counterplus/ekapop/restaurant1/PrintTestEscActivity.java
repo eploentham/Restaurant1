@@ -19,6 +19,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class PrintTestEscActivity extends AppCompatActivity {
+    public final static char LF  = (char) 0x0A;
+    public final static char TAB  = (char) 0x09;
 
     EditText txtPtePrint;
     Button btnPteOpen, btnPtePrint;
@@ -199,7 +201,7 @@ public class PrintTestEscActivity extends AppCompatActivity {
 
             // the text typed by the user
             String msg = txtPtePrint.getText().toString();
-            msg += "\n";
+            msg += LF;
 
             mmOutputStream.write(msg.getBytes());
 
