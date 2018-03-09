@@ -5,11 +5,11 @@ package com.counterplus.ekapop.restaurant1;
  */
 
 public class FoodsPrint extends Database {
-    public String ID="", Code="", Name="", Remark="", Active="", Sort1="", VoidDate="", VoidUser="";
+    public String ID="", Code="", Name="", Remark="", Active="", Sort1="", VoidDate="", VoidUser="",FlagPrinterConnect="";
     public String dbID="foods_print_id", dbCode="foods_print_code", dbName="foods_print_name", dbRemark="remark", dbActive="active", dbSort1="sort1", dbVoidDate="void_date", dbVoidUser="void_user";
 
     public String IP="", PrintBrand="", PrintModel="";
-    public String dbIP="ip", dbPrintBrand="brand", dbPrintModel="model";
+    public String dbIP="ip", dbPrintBrand="brand", dbPrintModel="model", dbFlagPrinterConnect="flag_printer_connect";
 
     public String cFoodsPrintMySQL=creaT+" '"+dbNameD+"'.'"+tbNameFoodsPrint+"' "
             +"('"+dbID+"' "+varc+" NOT NULL "
@@ -30,6 +30,7 @@ public class FoodsPrint extends Database {
             +", "+dbIP+" "+tex+"  NULL "
             +", "+dbPrintBrand+" "+tex+"  NULL "
             +", "+dbPrintModel+" "+tex+"  NULL "
+            +", "+dbFlagPrinterConnect+" "+tex+"  NULL "
             +", "+dbActive+" "+tex+"  NULL "
             +", "+dbSort1+" "+tex+"  NULL "
             +", "+dbDateCreate+" "+tex+"  NULL "

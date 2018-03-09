@@ -59,11 +59,11 @@
         android:id="@+id/lbFpaIP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbFpaName" />
+        app:layout_constraintTop_toBottomOf="@id/lbFpaPrintConnect" />
 
     <EditText
         android:id="@+id/txtFpaIP"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@+id/lbFpaIP"
-        app:layout_constraintTop_toBottomOf="@+id/txtFpaName" />
+        app:layout_constraintTop_toBottomOf="@+id/chkGFpaPrintConnect" />
 
     <TextView
         android:id="@+id/lbFpaBrand"
@@ -229,4 +229,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lbFpaRemark"
         app:layout_constraintTop_toBottomOf="@+id/txtFpaSort1" />
+
+    <TextView
+        android:id="@+id/lbFpaPrintConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbFpaName" />
+
+    <RadioGroup
+        android:id="@+id/chkGFpaPrintConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFpaName">
+
+        <RadioButton
+            android:id="@+id/chkFpaIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/chkFpaBluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/chkFpaLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+    </RadioGroup>
 </android.support.constraint.ConstraintLayout>

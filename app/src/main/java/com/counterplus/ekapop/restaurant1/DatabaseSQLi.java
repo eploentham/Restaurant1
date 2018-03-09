@@ -668,6 +668,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
             jsonObj.put(fp.dbBranchId, chkNull(c.getString(c.getColumnIndex(fp.dbBranchId)))?"":c.getString(c.getColumnIndex(fp.dbBranchId)));
             jsonObj.put(fp.dbDeviceId, chkNull(c.getString(c.getColumnIndex(fp.dbDeviceId)))?"":c.getString(c.getColumnIndex(fp.dbDeviceId)));
             jsonObj.put(fp.dbIP, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbIP)));
+            jsonObj.put(fp.dbFlagPrinterConnect, chkNull(c.getString(c.getColumnIndex(fp.dbIP)))?"":c.getString(c.getColumnIndex(fp.dbFlagPrinterConnect)));
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("getJsonObjectFoodsP ",e.getMessage());
@@ -1201,7 +1202,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
         }
         return  jarr;
     }
-    public JSONArray FoodsPrintInsert(String id, String code, String name, String remark, String sort1, String ip ){
+    public JSONArray FoodsPrintInsert(String id, String code, String name, String remark, String sort1, String ip, String flagPrinterConnect ){
         String sql="",err="", code1="";
         JSONArray jarr = new JSONArray();
         JSONObject jsonObj = new JSONObject();
@@ -1221,8 +1222,8 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                 }
                 c.close();
 //                db.close();
-                sql ="Insert Into "+da.tbNameFoodsPrint+"("+fp.dbID+","+fp.dbCode+","+fp.dbName+","+fp.dbRemark+","+fp.dbSort1+","+fp.dbDateCreate+","+fp.dbActive+","+fp.dbIP+") "
-                        +"Values ("+this.genid +",'"+code1+"','"+name+"','"+remark+"','"+sort1+"',"+ gendate +",'1','"+ip+"')";
+                sql ="Insert Into "+da.tbNameFoodsPrint+"("+fp.dbID+","+fp.dbCode+","+fp.dbName+","+fp.dbRemark+","+fp.dbSort1+","+fp.dbDateCreate+","+fp.dbActive+","+fp.dbIP+","+fp.dbFlagPrinterConnect+") "
+                        +"Values ("+this.genid +",'"+code1+"','"+name+"','"+remark+"','"+sort1+"',"+ gendate +",'1','"+ip+"','"+flagPrinterConnect+"')";
             }else{
                 sql="Update "+da.tbNameFoodsPrint +" "
                         +"Set "+fp.dbCode+"='"+code+"' "
@@ -1230,6 +1231,7 @@ public class DatabaseSQLi extends SQLiteOpenHelper {
                         +","+fp.dbRemark+"='"+remark+"' "
                         +","+fp.dbSort1+"='"+sort1+"' "
                         +","+fp.dbIP+"='"+ip+"' "
+                        +","+fp.dbFlagPrinterConnect+"='"+flagPrinterConnect+"' "
                         +" Where "+fp.dbID+"='"+id+"'";
             }
             db.execSQL(sql);

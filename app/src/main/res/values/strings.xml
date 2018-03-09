@@ -131,6 +131,11 @@
     <string name="lbFaFoodsCat">กลุ่มอาหาร</string>
     <string name="lbFpaBrand">ยี่ห้อ</string>
     <string name="lbFpaModel">รุ่น</string>
+    <string name="lbFpaPrintConnect">การเชื่อต่อ</string>
+    <string name="chkFpaLocal">local</string>
+    <string name="chkFpaIP">IP</string>
+    <string name="chkFpaBluetooth">Bluetooth</string>
+
 
 
     <string name="january">มกราคม</string>

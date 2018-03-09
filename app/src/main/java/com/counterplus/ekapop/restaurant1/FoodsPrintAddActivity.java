@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,11 +28,13 @@ import java.util.List;
 
 public class FoodsPrintAddActivity extends AppCompatActivity {
 
-    TextView lbFpaCode, lbFpaName, lbFpaRemark, lbFpaSort1, lbFpaActive, lbFpaIP, lbFpaBrand, lbFpaModel;
+    TextView lbFpaCode, lbFpaName, lbFpaRemark, lbFpaSort1, lbFpaActive, lbFpaIP, lbFpaBrand, lbFpaModel, lbFpaPrintConnect;
     EditText txtFpaCode, txtFpaName, txtFpaRemark, txtFpaSort1, txtFpaPasswordVoid, txtFpaIP;
     Switch chkFpaActive;
     Button btnFpaSave, btnFpaVoid;
     Spinner cboFpaBrand,cboFpaModel;
+    RadioButton chkFpaLocal, chkFpaIP, chkFpaBluetooth;
+    RadioGroup chkGFpaPrintConnect;
 
     FoodsPrint fp = new FoodsPrint();
 
@@ -72,6 +76,10 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         lbFpaModel = findViewById(R.id.lbFpaModel);
         cboFpaBrand = findViewById(R.id.cboFpaBrand);
         cboFpaModel = findViewById(R.id.cboFpaModel);
+        lbFpaPrintConnect = findViewById(R.id.lbFpaPrintConnect);
+        chkFpaLocal = findViewById(R.id.chkFpaLocal);
+        chkFpaIP = findViewById(R.id.chkFpaIP);
+        chkFpaBluetooth = findViewById(R.id.chkFpaBluetooth);
 
         lbFpaCode.setText(R.string.code);
         lbFpaName.setText(R.string.name);
@@ -83,12 +91,17 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         btnFpaVoid.setText(R.string.void1);
         lbFpaModel.setText(R.string.lbFpaModel);
         lbFpaBrand.setText(R.string.lbFpaBrand);
+        lbFpaPrintConnect.setText(R.string.lbFpaPrintConnect);
+        chkFpaLocal.setText(R.string.chkFpaLocal);
+        chkFpaIP.setText(R.string.chkFpaIP);
+        chkFpaBluetooth.setText(R.string.chkFpaBluetooth);
+
         btnFpaSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(rs.AccessMode.equals("Standalone")) {
                     getFoodsPrint();
-                    jarr = daS.FoodsPrintInsert(fp.ID, fp.Code, fp.Name, fp.Remark, fp.Sort1, fp.IP);
+                    jarr = daS.FoodsPrintInsert(fp.ID, fp.Code, fp.Name, fp.Remark, fp.Sort1, fp.IP, fp.FlagPrinterConnect);
                     getFoodsPrintInsert();
                 }else if(rs.AccessMode.equals("Internet")){
                     getFoodsPrint();
@@ -97,7 +110,6 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
                     getFoodsPrint();
                     new insertFoodsPrint().execute();
                 }
-
             }
         });
         btnFpaVoid.setVisibility(View.INVISIBLE);
@@ -234,6 +246,7 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
                 fp.Sort1 = catObj.getString(fp.dbSort1);
                 fp.Active = catObj.getString(fp.dbActive);
                 fp.IP = catObj.getString(fp.dbIP);
+                fp.FlagPrinterConnect = catObj.getString(fp.dbFlagPrinterConnect);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -251,6 +264,13 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
             }else{
                 chkFpaActive.setChecked(false);
             }
+            if(fp.FlagPrinterConnect.equals("bluetooth")){
+                chkFpaBluetooth.setChecked(true);
+            }else if(fp.FlagPrinterConnect.equals("ip")){
+                chkFpaIP.setChecked(true);
+            }else if(fp.FlagPrinterConnect.equals("local")){
+                chkFpaLocal.setChecked(true);
+            }
         }
     }
     private void getFoodsPrint(){
@@ -262,6 +282,13 @@ public class FoodsPrintAddActivity extends AppCompatActivity {
         fp.Name= txtFpaName.getText().toString();
         fp.Remark= txtFpaRemark.getText().toString();
         fp.IP= txtFpaIP.getText().toString();
+        if(chkFpaBluetooth.isChecked()){
+            fp.FlagPrinterConnect="bluetooth";
+        }else if(chkFpaIP.isChecked()){
+            fp.FlagPrinterConnect="ip";
+        }else if(chkFpaLocal.isChecked()){
+            fp.FlagPrinterConnect="local";
+        }
     }
     class insertFoodsPrint extends AsyncTask<String,String,String> {
         @Override

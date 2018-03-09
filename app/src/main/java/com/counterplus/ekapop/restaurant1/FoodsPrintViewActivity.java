@@ -157,10 +157,11 @@ public class FoodsPrintViewActivity extends AppCompatActivity {
                     a.Remark = catObj.getString(a.dbRemark);
                     a.Active = catObj.getString(a.dbActive);
                     a.IP = catObj.getString(a.dbIP);
+                    a.FlagPrinterConnect = catObj.getString(a.dbFlagPrinterConnect);
                     a.Sort1 = catObj.getString(a.dbSort1);
                     lRes.add(a);
                     //arrayList.add(f.Code+" "+f.Name+" "+f.Price+" "+f.Remark+" ร้าน "+rs.getResToName(f.ResId,"genid")+" ประเภท "+rs.getFoodsTypeToName(f.TypeId,"genid")+" สถานะ "+f.StatusFoods+" เครื่องพิมพ์ "+f.PrinterName);
-                    arrayList.add(a.Code+" "+a.Name+" "+a.IP+" "+a.Remark);
+                    arrayList.add(a.Code+" "+a.Name+" "+a.FlagPrinterConnect+" "+a.IP+" "+a.Remark);
                 }
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList){
                     @Override
